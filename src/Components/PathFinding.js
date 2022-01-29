@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Node from './Node';
 import { dijkstra, getShortestPath } from '../Algorithms/dijkstra';
 import { bfs } from '../Algorithms/bfs';
+import { dfs } from '../Algorithms/dfs';
 
 const PathFinding = () => {
   const [grid, setGrid] = useState([]);
@@ -41,6 +42,25 @@ const PathFinding = () => {
       if (i === nodes.length - 1) {
         setTimeout(() => {
           animatePath(shortestPath);
+        }, i * 10);
+      } else {
+        setTimeout(() => {
+          document
+            .getElementById(`${node.row}-${node.col}`)
+            .classList.add('visited');
+        }, i * 10);
+      }
+    }
+  };
+
+  const runDFS = () => {
+    let nodes = dfs(grid, grid[start[0]][start[1]], grid[end[0]][end[1]]);
+    console.log(nodes);
+    for (let i = 0; i < nodes.length; i++) {
+      let node = nodes[i];
+      if (i === nodes.length - 1) {
+        setTimeout(() => {
+          animatePath(nodes);
         }, i * 10);
       } else {
         setTimeout(() => {
@@ -94,6 +114,9 @@ const PathFinding = () => {
       </div>
       <div className="controls">
         <button onClick={() => runBfs()}>BFS</button>
+      </div>
+      <div className="controls">
+        <button onClick={() => runDFS()}>DFS</button>
       </div>
       <div className="grid">
         {grid.map((row, i) => {
