@@ -14,6 +14,32 @@ const PathFinding = () => {
   const runDijkstra = () => {
     let nodes = dijkstra(grid, grid[start[0]][start[1]], grid[end[0]][end[1]]);
     let shortestPath = getShortestPath(grid[end[0]][end[1]]);
+
+    for (let i = 0; i < nodes.length; i++) {
+      let node = nodes[i];
+      if (i === nodes.length - 1) {
+        setTimeout(() => {
+          animatePath(shortestPath);
+        }, i * 10);
+      } else {
+        setTimeout(() => {
+          document
+            .getElementById(`${node.row}-${node.col}`)
+            .classList.add('visited');
+        }, i * 10);
+      }
+    }
+  };
+
+  const animatePath = (path) => {
+    for (let i = 0; i < path.length; i++) {
+      setTimeout(() => {
+        let node = path[i];
+        document.getElementById(
+          `${node.row}-${node.col}`
+        ).style.backgroundColor = 'yello';
+      }, i * 50);
+    }
   };
 
   const generateGrid = () => {
