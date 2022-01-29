@@ -10,6 +10,11 @@ export const dijkstra = (grid, startNode, endNode) => {
     if (closestNode.distance === Infinity) {
       return nodesInOrder;
     }
+
+    if (closestNode.isWall) {
+      continue;
+    }
+
     closestNode.isVisited = true;
     nodesInOrder.push(closestNode);
     if (closestNode === endNode) {

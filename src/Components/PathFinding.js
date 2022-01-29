@@ -35,7 +35,18 @@ const PathFinding = () => {
   };
 
   const handleMouseDown = (row, col) => {
+    setMouseDown(true);
     generateUpdatedGrid(row, col);
+  };
+
+  const handleMouseUp = (row, col) => {
+    setMouseDown(false);
+  };
+
+  const handleMouseEnter = (row, col) => {
+    if (mouseDown) {
+      generateUpdatedGrid(row, col);
+    }
   };
 
   const runBfs = () => {
@@ -101,8 +112,14 @@ const PathFinding = () => {
   };
 
   const generateUpdatedGrid = (row, col) => {
-    const newGrid = grid.slice();
+    if (
+      (row === start[0] && col === start[1]) ||
+      (row === end[0] && col === end[1])
+    ) {
+      return;
+    }
     const node = grid[row][col];
+    const newGrid = grid.slice();
     const newNode = { ...node, isWall: !node.isWall };
     newGrid[row][col] = newNode;
     setGrid(newGrid);
@@ -155,7 +172,9 @@ const PathFinding = () => {
                     isEnd={isEnd}
                     isVisited={isVisited}
                     prevousNode={previousNode}
+                    handleMouseEnter={handleMouseEnter}
                     handleMouseDown={handleMouseDown}
+                    handleMouseUp={handleMouseUp}
                     isWall={isWall}
                   />
                 );

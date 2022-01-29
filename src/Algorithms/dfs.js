@@ -44,5 +44,5 @@ const getNeighbours = (grid, node) => {
     nodes.push(grid[row][col - 1]);
   }
 
-  return nodes.filter((nei) => !nei.isVisited);
+  return nodes.filter((nei) => !nei.isVisited && !nei.isWall);
 };

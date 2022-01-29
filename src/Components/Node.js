@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-const Node = ({ row, col, isStart, isEnd, isWall, handleMouseDown }) => {
+const Node = ({
+  row,
+  col,
+  isStart,
+  isEnd,
+  isWall,
+  handleMouseDown,
+  handleMouseEnter,
+  handleMouseUp,
+}) => {
   return (
     <div
       id={`${row}-${col}`}
@@ -8,6 +17,8 @@ const Node = ({ row, col, isStart, isEnd, isWall, handleMouseDown }) => {
         isWall ? 'wall' : ''
       }`}
       onMouseDown={() => handleMouseDown(row, col)}
+      onMouseEnter={() => handleMouseEnter(row, col)}
+      onMouseUp={() => handleMouseUp()}
     ></div>
   );
 };

@@ -4,7 +4,6 @@ export const bfs = (grid, startNode, endNode) => {
   queue.push(startNode);
 
   while (queue.length > 0) {
-    console.log('running');
     let node = queue.shift();
     nodesInOrder.push(node);
     if (node === endNode) {
@@ -38,5 +37,5 @@ const getNeighbours = (grid, node) => {
   if (col < grid[0].length - 1) {
     nodes.push(grid[row][col + 1]);
   }
-  return nodes.filter((nei) => !nei.isVisited);
+  return nodes.filter((nei) => !nei.isVisited && !nei.isWall);
 };
