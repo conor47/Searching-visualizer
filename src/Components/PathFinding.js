@@ -8,6 +8,7 @@ const PathFinding = () => {
   const [grid, setGrid] = useState([]);
   const [start, setStart] = useState([7, 10]);
   const [end, setEnd] = useState([7, 40]);
+  const [moveStart, setMoveStart] = useState(false);
   const [mouseDown, setMouseDown] = useState(false);
 
   useEffect(() => {
@@ -15,6 +16,7 @@ const PathFinding = () => {
   }, []);
 
   const runDijkstra = () => {
+    clearVisited();
     let nodes = dijkstra(grid, grid[start[0]][start[1]], grid[end[0]][end[1]]);
     let shortestPath = getShortestPath(grid[end[0]][end[1]]);
 
@@ -35,21 +37,33 @@ const PathFinding = () => {
   };
 
   const handleMouseDown = (row, col) => {
+    if (row === start[0] && col === start[1]) {
+      setMouseDown(true);
+      setMoveStart(true);
+      return;
+    }
     setMouseDown(true);
     generateUpdatedGrid(row, col);
   };
 
   const handleMouseUp = (row, col) => {
     setMouseDown(false);
+    setMoveStart(false);
   };
 
   const handleMouseEnter = (row, col) => {
+    if (mouseDown && moveStart) {
+      moveStartNode(row, col);
+      return;
+    }
+
     if (mouseDown) {
       generateUpdatedGrid(row, col);
     }
   };
 
   const runBfs = () => {
+    clearVisited();
     let nodes = bfs(grid, grid[start[0]][start[1]], grid[end[0]][end[1]]);
     console.log(nodes);
     let shortestPath = getShortestPath(grid[end[0]][end[1]]);
@@ -70,6 +84,7 @@ const PathFinding = () => {
   };
 
   const runDFS = () => {
+    clearVisited();
     let nodes = dfs(grid, grid[start[0]][start[1]], grid[end[0]][end[1]]);
     console.log(nodes);
     for (let i = 0; i < nodes.length; i++) {
@@ -92,9 +107,9 @@ const PathFinding = () => {
     for (let i = 0; i < path.length; i++) {
       setTimeout(() => {
         let node = path[i];
-        document.getElementById(
-          `${node.row}-${node.col}`
-        ).style.backgroundColor = 'green';
+        document
+          .getElementById(`${node.row}-${node.col}`)
+          .classList.add('shortest');
       }, i * 50);
     }
   };
@@ -109,6 +124,21 @@ const PathFinding = () => {
       grid.push(row);
     }
     return grid;
+  };
+
+  const moveStartNode = (row, col) => {
+    const newGrid = grid.slice();
+
+    let oldStart = grid[start[0]][start[1]];
+    let updatedOld = { ...oldStart, isStart: false };
+    newGrid[oldStart.row][oldStart.col] = updatedOld;
+
+    let newStart = grid[row][col];
+    let newUpdatedStart = { ...newStart, isStart: true };
+    newGrid[row][col] = newUpdatedStart;
+
+    setStart([row, col]);
+    setGrid(newGrid);
   };
 
   const generateUpdatedGrid = (row, col) => {
@@ -138,6 +168,40 @@ const PathFinding = () => {
     };
   };
 
+  const clearWalls = () => {
+    let newGrid = [];
+    for (let i = 0; i < grid.length; i++) {
+      let row = [];
+      for (let j = 0; j < grid[0].length; j++) {
+        let node = grid[i][j];
+        if (node.isWall) {
+          node.isWall = false;
+        }
+        row.push(node);
+      }
+      newGrid.push(row);
+    }
+    setGrid(newGrid);
+  };
+
+  const clearVisited = () => {
+    let newGrid = [];
+    for (let i = 0; i < grid.length; i++) {
+      let row = [];
+      for (let j = 0; j < grid[0].length; j++) {
+        let node = grid[i][j];
+        if (node.isVisited) {
+          node.isVisited = false;
+          document.getElementById(`${i}-${j}`).classList.remove('visited');
+          document.getElementById(`${i}-${j}`).classList.remove('shortest');
+        }
+        row.push(node);
+      }
+      newGrid.push(row);
+    }
+    setGrid(newGrid);
+  };
+
   return (
     <div>
       <div className="controls">
@@ -148,6 +212,9 @@ const PathFinding = () => {
       </div>
       <div className="controls">
         <button onClick={() => runDFS()}>DFS</button>
+      </div>
+      <div className="controls">
+        <button onClick={() => clearWalls()}>Clear Walls</button>
       </div>
       <div className="grid">
         {grid.map((row, i) => {
