@@ -3,6 +3,7 @@ import Node from './Node';
 import { dijkstra, getShortestPath } from '../Algorithms/dijkstra';
 import { bfs } from '../Algorithms/bfs';
 import { dfs } from '../Algorithms/dfs';
+import { bidrectionalBFS } from '../Algorithms/bidirectionalBFS';
 
 const PathFinding = () => {
   const [grid, setGrid] = useState([]);
@@ -71,10 +72,33 @@ const PathFinding = () => {
     }
   };
 
+  const runBidirectionalBFS = () => {
+    clearVisited();
+    let nodes = bidrectionalBFS(
+      grid,
+      grid[start[0]][start[1]],
+      grid[end[0]][end[1]]
+    );
+    let shortestPath = getShortestPath(grid[end[0]][end[1]]);
+    for (let i = 0; i < nodes.length; i++) {
+      let node = nodes[i];
+      if (i === nodes.length - 1) {
+        setTimeout(() => {
+          animatePath(shortestPath);
+        }, i * 10);
+      } else {
+        setTimeout(() => {
+          document
+            .getElementById(`${node.row}-${node.col}`)
+            .classList.add('visited');
+        }, i * 10);
+      }
+    }
+  };
+
   const runBfs = () => {
     clearVisited();
     let nodes = bfs(grid, grid[start[0]][start[1]], grid[end[0]][end[1]]);
-    console.log(nodes);
     let shortestPath = getShortestPath(grid[end[0]][end[1]]);
     for (let i = 0; i < nodes.length; i++) {
       let node = nodes[i];
@@ -236,6 +260,9 @@ const PathFinding = () => {
       </div>
       <div className="controls">
         <button onClick={() => runDFS()}>DFS</button>
+      </div>
+      <div className="controls">
+        <button onClick={() => runBidirectionalBFS()}>Bidirectional BFS</button>
       </div>
       <div className="controls">
         <button onClick={() => clearWalls()}>Clear Walls</button>
