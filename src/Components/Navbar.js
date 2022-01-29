@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavbarContext } from '../Context/NavbarContext';
 
 const Navbar = () => {
-  const { openSidebar, openSubmenu, closeSubmenu } = useNavbarContext();
+  const { openSubmenu, closeSubmenu } = useNavbarContext();
   const displaySubmenu = (e) => {
     const page = e.target.textContent;
     const tempBtn = e.target.getBoundingClientRect();
@@ -21,7 +21,7 @@ const Navbar = () => {
         <ul className="nav-links">
           <li>
             <button className="link-btn" onMouseOver={displaySubmenu}>
-              Algorithms
+              algorithms
             </button>
           </li>
           <li>

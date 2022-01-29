@@ -2,7 +2,7 @@ import { FaCreditCard, FaBook, FaBriefcase } from 'react-icons/fa';
 import React from 'react';
 const sublinks = [
   {
-    algorithms: 'algorithms',
+    page: 'algorithms',
     links: [
       { label: 'payment', icon: <FaCreditCard />, url: '/products' },
       { label: 'terminal', icon: <FaCreditCard />, url: '/products' },
