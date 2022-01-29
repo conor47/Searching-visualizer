@@ -3,7 +3,10 @@ import Node from './Node';
 import { dijkstra, getShortestPath } from '../Algorithms/dijkstra';
 import { bfs } from '../Algorithms/bfs';
 import { dfs } from '../Algorithms/dfs';
-import { bidrectionalBFS } from '../Algorithms/bidirectionalBFS';
+import {
+  bidrectionalBFS,
+  getShortestPathBiDirectional,
+} from '../Algorithms/bidirectionalBFS';
 
 const PathFinding = () => {
   const [grid, setGrid] = useState([]);
@@ -74,12 +77,16 @@ const PathFinding = () => {
 
   const runBidirectionalBFS = () => {
     clearVisited();
-    let nodes = bidrectionalBFS(
+    const { nodes, middleA, middleB } = bidrectionalBFS(
       grid,
       grid[start[0]][start[1]],
       grid[end[0]][end[1]]
     );
-    let shortestPath = getShortestPath(grid[end[0]][end[1]]);
+    let shortestPath = getShortestPathBiDirectional(
+      grid[end[0]][end[1]],
+      middleA,
+      middleB
+    );
     for (let i = 0; i < nodes.length; i++) {
       let node = nodes[i];
       if (i === nodes.length - 1) {
