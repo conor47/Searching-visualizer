@@ -8,6 +8,7 @@ const PathFinding = () => {
   const [grid, setGrid] = useState([]);
   const [start, setStart] = useState([7, 10]);
   const [end, setEnd] = useState([7, 40]);
+  const [mouseDown, setMouseDown] = useState(false);
 
   useEffect(() => {
     setGrid(generateGrid());
@@ -31,6 +32,10 @@ const PathFinding = () => {
         }, i * 10);
       }
     }
+  };
+
+  const handleMouseDown = (row, col) => {
+    generateUpdatedGrid(row, col);
   };
 
   const runBfs = () => {
@@ -95,6 +100,14 @@ const PathFinding = () => {
     return grid;
   };
 
+  const generateUpdatedGrid = (row, col) => {
+    const newGrid = grid.slice();
+    const node = grid[row][col];
+    const newNode = { ...node, isWall: !node.isWall };
+    newGrid[row][col] = newNode;
+    setGrid(newGrid);
+  };
+
   const createNode = (row, col) => {
     return {
       row,
@@ -104,6 +117,7 @@ const PathFinding = () => {
       isStart: row === start[0] && col === start[1],
       isVisited: false,
       previousNode: null,
+      isWall: false,
     };
   };
 
@@ -123,8 +137,15 @@ const PathFinding = () => {
           return (
             <div className="row" key={i}>
               {row.map((node, j) => {
-                const { row, col, isEnd, isStart, isVisited, previousNode } =
-                  grid[i][j];
+                const {
+                  row,
+                  col,
+                  isWall,
+                  isEnd,
+                  isStart,
+                  isVisited,
+                  previousNode,
+                } = grid[i][j];
                 return (
                   <Node
                     key={j}
@@ -134,6 +155,8 @@ const PathFinding = () => {
                     isEnd={isEnd}
                     isVisited={isVisited}
                     prevousNode={previousNode}
+                    handleMouseDown={handleMouseDown}
+                    isWall={isWall}
                   />
                 );
               })}

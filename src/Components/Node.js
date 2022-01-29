@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-const Node = ({ row, col, isStart, isEnd }) => {
+const Node = ({ row, col, isStart, isEnd, isWall, handleMouseDown }) => {
   return (
     <div
       id={`${row}-${col}`}
-      className={`node ${isStart ? 'start' : ''} ${isEnd ? 'end' : ''}`}
+      className={`node ${isStart ? 'start' : ''} ${isEnd ? 'end' : ''} ${
+        isWall ? 'wall' : ''
+      }`}
+      onMouseDown={() => handleMouseDown(row, col)}
     ></div>
   );
 };

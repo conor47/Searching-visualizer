@@ -34,3 +34,6 @@ body {
 .visited {
   background-color: blue;
 }
+.wall {
+  background-color: brown;
+}

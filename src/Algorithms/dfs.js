@@ -11,6 +11,7 @@ const recurse = (grid, node, nodesInOrder, endNode) => {
     return true;
   }
   let res = false;
+  node.isVisited = true;
   nodesInOrder.push(node);
   let neighbours = getNeighbours(grid, node);
   for (let i = 0; i < neighbours.length; i++) {
