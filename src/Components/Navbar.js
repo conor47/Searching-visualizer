@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaBars } from 'react-icons/fa';
 import { useNavbarContext } from '../Context/NavbarContext';
 
 const Navbar = () => {
@@ -19,15 +18,10 @@ const Navbar = () => {
   return (
     <nav className="nav" onMouseOver={handleSubmenu}>
       <div className="nav-center">
-        <div className="nav-header">
-          <button className="btn toggle-btn" onClick={openSidebar}>
-            <FaBars />
-          </button>
-        </div>
         <ul className="nav-links">
           <li>
             <button className="link-btn" onMouseOver={displaySubmenu}>
-              products
+              Algorithms
             </button>
           </li>
           <li>
@@ -41,7 +35,6 @@ const Navbar = () => {
             </button>
           </li>
         </ul>
-        <button className="btn signin-btn">Sign in</button>
       </div>
     </nav>
   );

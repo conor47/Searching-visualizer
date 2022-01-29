@@ -33,7 +33,7 @@ const NavbarProvider = ({ children }) => {
   );
 };
 // make sure use
-export const useGlobalContext = () => {
+export const useNavbarContext = () => {
   return useContext(NavbarContext);
 };
 
