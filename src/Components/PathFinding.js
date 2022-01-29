@@ -8,6 +8,7 @@ const PathFinding = () => {
   const [grid, setGrid] = useState([]);
   const [start, setStart] = useState([7, 10]);
   const [end, setEnd] = useState([7, 40]);
+  const [moveEnd, setMoveEnd] = useState(false);
   const [moveStart, setMoveStart] = useState(false);
   const [mouseDown, setMouseDown] = useState(false);
 
@@ -41,6 +42,10 @@ const PathFinding = () => {
       setMouseDown(true);
       setMoveStart(true);
       return;
+    } else if (row === end[0] && col == end[1]) {
+      setMouseDown(true);
+      setMoveEnd(true);
+      return;
     }
     setMouseDown(true);
     generateUpdatedGrid(row, col);
@@ -49,11 +54,15 @@ const PathFinding = () => {
   const handleMouseUp = (row, col) => {
     setMouseDown(false);
     setMoveStart(false);
+    setMoveEnd(false);
   };
 
   const handleMouseEnter = (row, col) => {
     if (mouseDown && moveStart) {
       moveStartNode(row, col);
+      return;
+    } else if (mouseDown && moveEnd) {
+      moveEndNode(row, col);
       return;
     }
 
@@ -138,6 +147,21 @@ const PathFinding = () => {
     newGrid[row][col] = newUpdatedStart;
 
     setStart([row, col]);
+    setGrid(newGrid);
+  };
+
+  const moveEndNode = (row, col) => {
+    const newGrid = grid.slice();
+
+    let oldEnd = grid[end[0]][end[1]];
+    let updatedOld = { ...oldEnd, isEnd: false };
+    newGrid[oldEnd.row][oldEnd.col] = updatedOld;
+
+    let newEnd = grid[row][col];
+    let newUpdatedEnd = { ...newEnd, isEnd: true };
+    newGrid[row][col] = newUpdatedEnd;
+
+    setEnd([row, col]);
     setGrid(newGrid);
   };
 
