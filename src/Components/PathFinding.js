@@ -13,14 +13,18 @@ import { useSearchingContext } from '../Context/SearchingContext';
 import { generateGrid } from '../Ulilities/gridFunctions';
 
 const PathFinding = () => {
-  // const [grid, setGrid] = useState([]);
-  const [start, setStart] = useState([7, 10]);
-  const [end, setEnd] = useState([7, 40]);
   const [moveEnd, setMoveEnd] = useState(false);
   const [moveStart, setMoveStart] = useState(false);
   const [mouseDown, setMouseDown] = useState(false);
 
-  const { grid, startNode, endNode, updateGrid } = useSearchingContext();
+  const {
+    grid,
+    updateGrid,
+    setStartNode,
+    setEndNode,
+    startNode: start,
+    endNode: end,
+  } = useSearchingContext();
   const { closeSubmenu } = useNavbarContext();
 
   useEffect(() => {
@@ -28,27 +32,6 @@ const PathFinding = () => {
       return false;
     };
   }, [grid]);
-
-  const runDijkstra = () => {
-    clearVisited();
-    let nodes = dijkstra(grid, grid[start[0]][start[1]], grid[end[0]][end[1]]);
-    let shortestPath = getShortestPath(grid[end[0]][end[1]]);
-
-    for (let i = 0; i < nodes.length; i++) {
-      let node = nodes[i];
-      if (i === nodes.length - 1) {
-        setTimeout(() => {
-          animatePath(shortestPath);
-        }, i * 10);
-      } else {
-        setTimeout(() => {
-          document
-            .getElementById(`${node.row}-${node.col}`)
-            .classList.add('visited');
-        }, i * 10);
-      }
-    }
-  };
 
   const handleMouseDown = (row, col) => {
     if (row === start[0] && col === start[1]) {
@@ -84,117 +67,6 @@ const PathFinding = () => {
     }
   };
 
-  const runBidirectionalBFS = () => {
-    clearVisited();
-    const { nodes, middleA, middleB } = bidrectionalBFS(
-      grid,
-      grid[start[0]][start[1]],
-      grid[end[0]][end[1]]
-    );
-    let shortestPath = getShortestPathBiDirectional(
-      grid[end[0]][end[1]],
-      middleA,
-      middleB
-    );
-    for (let i = 0; i < nodes.length; i++) {
-      let node = nodes[i];
-      if (i === nodes.length - 1) {
-        setTimeout(() => {
-          animatePath(shortestPath);
-        }, i * 10);
-      } else {
-        setTimeout(() => {
-          document
-            .getElementById(`${node.row}-${node.col}`)
-            .classList.add('visited');
-        }, i * 10);
-      }
-    }
-  };
-
-  const runBfs = () => {
-    clearVisited();
-    let nodes = bfs(grid, grid[start[0]][start[1]], grid[end[0]][end[1]]);
-    let shortestPath = getShortestPath(grid[end[0]][end[1]]);
-    for (let i = 0; i < nodes.length; i++) {
-      let node = nodes[i];
-      if (i === nodes.length - 1) {
-        setTimeout(() => {
-          animatePath(shortestPath);
-        }, i * 10);
-      } else {
-        setTimeout(() => {
-          document
-            .getElementById(`${node.row}-${node.col}`)
-            .classList.add('visited');
-        }, i * 10);
-      }
-    }
-  };
-
-  const runDFS = () => {
-    clearVisited();
-    let nodes = dfs(grid, grid[start[0]][start[1]], grid[end[0]][end[1]]);
-    console.log(nodes);
-    for (let i = 0; i < nodes.length; i++) {
-      let node = nodes[i];
-      if (i === nodes.length - 1) {
-        setTimeout(() => {
-          animatePath(nodes);
-        }, i * 10);
-      } else {
-        setTimeout(() => {
-          document
-            .getElementById(`${node.row}-${node.col}`)
-            .classList.add('visited');
-        }, i * 10);
-      }
-    }
-  };
-
-  const runAStar = () => {
-    clearVisited();
-    let nodes = astar(grid, grid[start[0]][start[1]], grid[end[0]][end[1]]);
-    let path = getShortestPathAStar(grid[end[0]][end[1]], grid);
-    for (let i = 0; i < nodes.length; i++) {
-      let node = nodes[i];
-      if (i === nodes.length - 1) {
-        setTimeout(() => {
-          animatePath(path);
-        }, i * 10);
-      } else {
-        setTimeout(() => {
-          document
-            .getElementById(`${node.row}-${node.col}`)
-            .classList.add('visited');
-        }, i * 10);
-      }
-    }
-  };
-
-  const animatePath = (path) => {
-    for (let i = 0; i < path.length; i++) {
-      setTimeout(() => {
-        let node = path[i];
-        document
-          .getElementById(`${node.row}-${node.col}`)
-          .classList.add('shortest');
-      }, i * 50);
-    }
-  };
-
-  // const generateGrid = () => {
-  //   let grid = [];
-  //   for (let i = 0; i < 20; i++) {
-  //     let row = [];
-  //     for (let j = 0; j < 50; j++) {
-  //       row.push(createNode(i, j));
-  //     }
-  //     grid.push(row);
-  //   }
-  //   return grid;
-  // };
-
   const moveStartNode = (row, col) => {
     const newGrid = grid.slice();
 
@@ -206,7 +78,7 @@ const PathFinding = () => {
     let newUpdatedStart = { ...newStart, isStart: true };
     newGrid[row][col] = newUpdatedStart;
 
-    setStart([row, col]);
+    setStartNode([row, col]);
     updateGrid(newGrid);
   };
 
@@ -221,7 +93,7 @@ const PathFinding = () => {
     let newUpdatedEnd = { ...newEnd, isEnd: true };
     newGrid[row][col] = newUpdatedEnd;
 
-    setEnd([row, col]);
+    setEndNode([row, col]);
     updateGrid(newGrid);
   };
 
