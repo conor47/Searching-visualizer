@@ -6,37 +6,32 @@ import {
   getShortestPathBiDirectional,
 } from '../Algorithms/bidirectionalBFS';
 import { dijkstra } from '../Algorithms/dijkstra';
-import { getShortestPath, animatePath } from '../Ulilities/gridFunctions';
+import { getShortestPath } from '../Ulilities/gridFunctions';
 
 const algorithms = [
   {
     name: 'dfs',
     algorithm: dfs,
-    animatePath,
-    shortestPath: animatePath,
+    shortestPath: null,
   },
   {
     name: 'bfs',
     algorithm: bfs,
-    animatePath,
     shortestPath: getShortestPath,
   },
   {
     name: 'astar',
     algorithm: astar,
-    animatePath,
     shortestPath: getShortestPathAStar,
   },
   {
     name: 'bidirectionalbfs',
     algorithm: bidrectionalBFS,
-    animatePath,
     shortestPath: getShortestPathBiDirectional,
   },
   {
     name: 'dijkstra',
     algorithm: dijkstra,
-    animatePath,
     shortestPath: getShortestPath,
   },
 ];

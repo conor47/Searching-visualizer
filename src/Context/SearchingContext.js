@@ -11,7 +11,6 @@ const initialState = {
   startNode: [7, 10],
   endNode: [7, 40],
   searchingAlgorithm: null,
-  shortestPathAlgorithm: null,
 };
 
 export const SearchProvider = ({ children }) => {

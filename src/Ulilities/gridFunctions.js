@@ -30,15 +30,13 @@ export const createNode = (row, col) => {
   };
 };
 
-const runAlgorithm = (
+export const runAlgorithm = (
   name,
   grid,
   algorithm,
   startNode,
   endNode,
-  animatePath,
-  shortestPath,
-  animateShortest
+  shortestPath
 ) => {
   if (name === 'bidirectionalbfs') {
     const { nodes, middleA, middleB } = algorithm(
@@ -51,8 +49,15 @@ const runAlgorithm = (
       middleA,
       middleB
     );
-    animatePath(nodes);
-    animateShortest(shortestPath);
+    animatePath(nodes, shortestPathNodes);
+    return;
+  } else if (name === 'dfs') {
+    const nodes = algorithm(
+      grid,
+      grid[startNode[0]][startNode[1]],
+      grid[endNode[0]][endNode[1]]
+    );
+    animatePath(nodes, nodes);
     return;
   }
 
@@ -62,18 +67,22 @@ const runAlgorithm = (
     grid[endNode[0]][endNode[1]]
   );
   const shortestPathNodes = shortestPath(grid[endNode[0]][endNode[1]]);
-  animatePath(nodes);
-  animateShortest(shortestPath);
+  animatePath(nodes, shortestPathNodes);
 };
 
-export const animatePath = (path) => {
+export const animatePath = (path, shortestPath) => {
   for (let i = 0; i < path.length; i++) {
+    if (i === path.length - 1) {
+      setTimeout(() => {
+        animateShortest(shortestPath);
+      }, i * 10);
+    }
     setTimeout(() => {
       let node = path[i];
       document
         .getElementById(`${node.row}-${node.col}`)
         .classList.add('visited');
-    }, i * 50);
+    }, i * 10);
   }
 };
 

@@ -1,10 +1,21 @@
 import React from 'react';
 import { useNavbarContext } from '../Context/NavbarContext';
+import { useSearchingContext } from '../Context/SearchingContext';
+import { runAlgorithm } from '../Ulilities/gridFunctions';
 
 const Navbar = () => {
   const { openSubmenu, closeSubmenu } = useNavbarContext();
+  const { grid, searchingAlgorithm, startNode, endNode } =
+    useSearchingContext();
 
-  const setAlgorithm = (e) => {};
+  const startRunning = () => {
+    if (!searchingAlgorithm) {
+      console.log('running!!');
+      return;
+    }
+    const { algorithm, shortestPath, name } = searchingAlgorithm;
+    runAlgorithm(name, grid, algorithm, startNode, endNode, shortestPath);
+  };
 
   const displaySubmenu = (e) => {
     const page = e.target.textContent;
@@ -39,7 +50,9 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <button className="btn">Run</button>
+      <button className="btn" onClick={() => startRunning()}>
+        Run
+      </button>
     </nav>
   );
 };
