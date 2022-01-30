@@ -7,6 +7,7 @@ import {
   bidrectionalBFS,
   getShortestPathBiDirectional,
 } from '../Algorithms/bidirectionalBFS';
+import { astar, getShortestPathAStar } from '../Algorithms/astar';
 import { useNavbarContext } from '../Context/NavbarContext';
 
 const PathFinding = () => {
@@ -146,6 +147,26 @@ const PathFinding = () => {
     }
   };
 
+  const runAStar = () => {
+    clearVisited();
+    let nodes = astar(grid, grid[start[0]][start[1]], grid[end[0]][end[1]]);
+    let path = getShortestPathAStar(grid[end[0]][end[1]], grid);
+    for (let i = 0; i < nodes.length; i++) {
+      let node = nodes[i];
+      if (i === nodes.length - 1) {
+        setTimeout(() => {
+          animatePath(path);
+        }, i * 10);
+      } else {
+        setTimeout(() => {
+          document
+            .getElementById(`${node.row}-${node.col}`)
+            .classList.add('visited');
+        }, i * 10);
+      }
+    }
+  };
+
   const animatePath = (path) => {
     for (let i = 0; i < path.length; i++) {
       setTimeout(() => {
@@ -223,9 +244,9 @@ const PathFinding = () => {
       isVisited: false,
       previousNode: null,
       isWall: false,
-      gCost: 0,
-      hCost: 0,
-      fCost: 0,
+      gCost: Infinity,
+      hCost: Infinity,
+      fCost: Infinity,
     };
   };
 
@@ -279,6 +300,9 @@ const PathFinding = () => {
           <button onClick={() => runBidirectionalBFS()}>
             Bidirectional BFS
           </button>
+        </div>
+        <div className="controls">
+          <button onClick={() => runAStar()}>a star</button>
         </div>
         <div className="controls">
           <button onClick={() => clearWalls()}>Clear Walls</button>
