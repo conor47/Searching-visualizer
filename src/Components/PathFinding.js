@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import Node from './Node';
 import { useNavbarContext } from '../Context/NavbarContext';
 import { useSearchingContext } from '../Context/SearchingContext';
@@ -98,28 +99,6 @@ const PathFinding = () => {
 
   return (
     <div onMouseOver={closeSubmenu} id="temp">
-      {/* <navbar>
-        <div className="controls">
-          <button onClick={() => runDijkstra()}>Dijkstra</button>
-        </div>
-        <div className="controls">
-          <button onClick={() => runBfs()}>BFS</button>
-        </div>
-        <div className="controls">
-          <button onClick={() => runDFS()}>DFS</button>
-        </div>
-        <div className="controls">
-          <button onClick={() => runBidirectionalBFS()}>
-            Bidirectional BFS
-          </button>
-        </div>
-        <div className="controls">
-          <button onClick={() => runAStar()}>a star</button>
-        </div>
-        <div className="controls">
-          <button onClick={() => clearWalls()}>Clear Walls</button>
-        </div>
-      </navbar> */}
       <div className="grid">
         {grid &&
           grid.map((row, i) => {
