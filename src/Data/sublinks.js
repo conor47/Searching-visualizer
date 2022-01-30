@@ -4,9 +4,11 @@ const sublinks = [
   {
     page: 'algorithms',
     links: [
-      { label: 'payment', icon: <FaCreditCard />, url: '/products' },
-      { label: 'terminal', icon: <FaCreditCard />, url: '/products' },
-      { label: 'connect', icon: <FaCreditCard />, url: '/products' },
+      { label: 'BFS', icon: <FaCreditCard /> },
+      { label: 'DFS', icon: <FaCreditCard /> },
+      { label: 'Dijkstra', icon: <FaCreditCard /> },
+      { label: 'AStar', icon: <FaCreditCard /> },
+      { label: 'BidirectionalBFS', icon: <FaCreditCard /> },
     ],
   },
   {

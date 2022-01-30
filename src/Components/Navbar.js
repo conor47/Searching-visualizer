@@ -36,6 +36,7 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
+      <button className="btn">Run</button>
     </nav>
   );
 };

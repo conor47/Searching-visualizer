@@ -7,14 +7,14 @@ import algorithms from '../Data/algorithms';
 const searchingContext = React.createContext();
 
 const initialState = {
-  grid: generateGrid(),
-  startNode: this.grid[7][10],
-  endNode: this.grid[7][40],
+  grid: [],
+  startNode: null,
+  endNode: null,
   searchingAlgorithm: null,
   shortestPathAlgorithm: null,
 };
 
-const SearchProvider = ({ children }) => {
+export const SearchProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const setSearchingAlgorithm = (text) => {
