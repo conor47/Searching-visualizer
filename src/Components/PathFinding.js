@@ -7,6 +7,7 @@ import {
   bidrectionalBFS,
   getShortestPathBiDirectional,
 } from '../Algorithms/bidirectionalBFS';
+import { useNavbarContext } from '../Context/NavbarContext';
 
 const PathFinding = () => {
   const [grid, setGrid] = useState([]);
@@ -15,6 +16,8 @@ const PathFinding = () => {
   const [moveEnd, setMoveEnd] = useState(false);
   const [moveStart, setMoveStart] = useState(false);
   const [mouseDown, setMouseDown] = useState(false);
+
+  const { closeSubmenu } = useNavbarContext();
 
   useEffect(() => {
     setGrid(generateGrid());
@@ -258,7 +261,7 @@ const PathFinding = () => {
   };
 
   return (
-    <div>
+    <div onMouseOver={closeSubmenu}>
       <navbar>
         <div className="controls">
           <button onClick={() => runDijkstra()}>Dijkstra</button>
