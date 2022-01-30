@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Node from './Node';
-import { dijkstra, getShortestPath } from '../Algorithms/dijkstra';
-import { bfs } from '../Algorithms/bfs';
-import { dfs } from '../Algorithms/dfs';
-import {
-  bidrectionalBFS,
-  getShortestPathBiDirectional,
-} from '../Algorithms/bidirectionalBFS';
-import { astar, getShortestPathAStar } from '../Algorithms/astar';
 import { useNavbarContext } from '../Context/NavbarContext';
 import { useSearchingContext } from '../Context/SearchingContext';
-import { generateGrid } from '../Ulilities/gridFunctions';
+import { updateWall } from '../Ulilities/gridFunctions';
 
 const PathFinding = () => {
   const [moveEnd, setMoveEnd] = useState(false);
@@ -44,7 +36,7 @@ const PathFinding = () => {
       return;
     }
     setMouseDown(true);
-    updateWall(row, col);
+    updateWall(row, col, start, end, grid, updateGrid);
   };
 
   const handleMouseUp = (row, col) => {
@@ -63,7 +55,7 @@ const PathFinding = () => {
     }
 
     if (mouseDown) {
-      updateWall(row, col);
+      updateWall(row, col, start, end, grid, updateGrid);
     }
   };
 
@@ -94,70 +86,6 @@ const PathFinding = () => {
     newGrid[row][col] = newUpdatedEnd;
 
     setEndNode([row, col]);
-    updateGrid(newGrid);
-  };
-
-  const updateWall = (row, col) => {
-    if (
-      (row === start[0] && col === start[1]) ||
-      (row === end[0] && col === end[1])
-    ) {
-      return;
-    }
-    const node = grid[row][col];
-    const newGrid = grid.slice();
-    const newNode = { ...node, isWall: !node.isWall };
-    newGrid[row][col] = newNode;
-    updateGrid(newGrid);
-  };
-
-  const createNode = (row, col) => {
-    return {
-      row,
-      col,
-      distance: Infinity,
-      isEnd: row === end[0] && col === end[1],
-      isStart: row === start[0] && col === start[1],
-      isVisited: false,
-      previousNode: null,
-      isWall: false,
-      gCost: Infinity,
-      hCost: Infinity,
-      fCost: Infinity,
-    };
-  };
-
-  const clearWalls = () => {
-    let newGrid = [];
-    for (let i = 0; i < grid.length; i++) {
-      let row = [];
-      for (let j = 0; j < grid[0].length; j++) {
-        let node = grid[i][j];
-        if (node.isWall) {
-          node.isWall = false;
-        }
-        row.push(node);
-      }
-      newGrid.push(row);
-    }
-    updateGrid(newGrid);
-  };
-
-  const clearVisited = () => {
-    let newGrid = [];
-    for (let i = 0; i < grid.length; i++) {
-      let row = [];
-      for (let j = 0; j < grid[0].length; j++) {
-        let node = grid[i][j];
-        if (node.isVisited) {
-          node.isVisited = false;
-          document.getElementById(`${i}-${j}`).classList.remove('visited');
-          document.getElementById(`${i}-${j}`).classList.remove('shortest');
-        }
-        row.push(node);
-      }
-      newGrid.push(row);
-    }
     updateGrid(newGrid);
   };
 

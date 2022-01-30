@@ -1,19 +1,23 @@
 import React from 'react';
 import { useNavbarContext } from '../Context/NavbarContext';
 import { useSearchingContext } from '../Context/SearchingContext';
-import { runAlgorithm } from '../Ulilities/gridFunctions';
+import {
+  runAlgorithm,
+  cleanGrid,
+  clearWalls,
+} from '../Ulilities/gridFunctions';
 
 const Navbar = () => {
   const { openSubmenu, closeSubmenu } = useNavbarContext();
-  const { grid, searchingAlgorithm, startNode, endNode } =
+  const { grid, searchingAlgorithm, startNode, endNode, updateGrid } =
     useSearchingContext();
 
   const startRunning = () => {
     if (!searchingAlgorithm) {
-      console.log('running!!');
       return;
     }
     const { algorithm, shortestPath, name } = searchingAlgorithm;
+    cleanGrid(grid);
     runAlgorithm(name, grid, algorithm, startNode, endNode, shortestPath);
   };
 
@@ -52,6 +56,9 @@ const Navbar = () => {
       </div>
       <button className="btn" onClick={() => startRunning()}>
         Run
+      </button>
+      <button className="btn" onClick={() => clearWalls(grid, updateGrid)}>
+        Clear
       </button>
     </nav>
   );

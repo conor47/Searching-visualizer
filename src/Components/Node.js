@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { VscArrowBoth } from 'react-icons/vsc';
+import React from 'react';
 
 const Node = ({
   row,

@@ -106,3 +106,50 @@ export const getShortestPath = (endNode) => {
   }
   return nodes;
 };
+
+export const updateWall = (row, col, start, end, grid, updateGrid) => {
+  if (
+    (row === start[0] && col === start[1]) ||
+    (row === end[0] && col === end[1])
+  ) {
+    return;
+  }
+  const node = grid[row][col];
+  const newGrid = grid.slice();
+  const newNode = { ...node, isWall: !node.isWall };
+  newGrid[row][col] = newNode;
+  updateGrid(newGrid);
+};
+
+export const cleanGrid = (grid) => {
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      document.getElementById(`${i}-${j}`).classList.remove('visited');
+      document.getElementById(`${i}-${j}`).classList.remove('shortest');
+    }
+  }
+};
+
+export const clearWalls = (grid, updateGrid) => {
+  let newGrid = [];
+  for (let i = 0; i < grid.length; i++) {
+    let row = [];
+    for (let j = 0; j < grid[0].length; j++) {
+      let node = grid[i][j];
+      if (node.isWall) {
+        node.isWall = false;
+      }
+      row.push(node);
+    }
+    newGrid.push(row);
+  }
+  updateGrid(newGrid);
+};
+
+export const clearVisited = (grid) => {
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      document.getElementById(`${i}-${j}`).classList.remove('visited');
+    }
+  }
+};
