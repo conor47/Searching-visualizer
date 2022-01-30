@@ -30,16 +30,70 @@ export const createNode = (row, col) => {
   };
 };
 
-// export const updateWall = (row, col,start,end,grid) => {
-//   if (
-//     (row === start[0] && col === start[1]) ||
-//     (row === end[0] && col === end[1])
-//   ) {
-//     return;
-//   }
-//   const node = grid[row][col];
-//   const newGrid = grid.slice();
-//   const newNode = { ...node, isWall: !node.isWall };
-//   newGrid[row][col] = newNode;
-//   setGrid(newGrid);
-// };
+const runAlgorithm = (
+  name,
+  grid,
+  algorithm,
+  startNode,
+  endNode,
+  animatePath,
+  shortestPath,
+  animateShortest
+) => {
+  if (name === 'bidirectionalbfs') {
+    const { nodes, middleA, middleB } = algorithm(
+      grid,
+      grid[startNode[0]][startNode[1]],
+      grid[endNode[0]][endNode[1]]
+    );
+    let shortestPathNodes = shortestPath(
+      grid[endNode[0]][endNode[1]],
+      middleA,
+      middleB
+    );
+    animatePath(nodes);
+    animateShortest(shortestPath);
+    return;
+  }
+
+  const nodes = algorithm(
+    grid,
+    grid[startNode[0]][startNode[1]],
+    grid[endNode[0]][endNode[1]]
+  );
+  const shortestPathNodes = shortestPath(grid[endNode[0]][endNode[1]]);
+  animatePath(nodes);
+  animateShortest(shortestPath);
+};
+
+export const animatePath = (path) => {
+  for (let i = 0; i < path.length; i++) {
+    setTimeout(() => {
+      let node = path[i];
+      document
+        .getElementById(`${node.row}-${node.col}`)
+        .classList.add('visited');
+    }, i * 50);
+  }
+};
+
+export const animateShortest = (path) => {
+  for (let i = 0; i < path.length; i++) {
+    setTimeout(() => {
+      let node = path[i];
+      document
+        .getElementById(`${node.row}-${node.col}`)
+        .classList.add('shortest');
+    }, i * 50);
+  }
+};
+
+export const getShortestPath = (endNode) => {
+  let cur = endNode;
+  const nodes = [];
+  while (cur) {
+    nodes.push(cur);
+    cur = cur.previousNode;
+  }
+  return nodes;
+};
