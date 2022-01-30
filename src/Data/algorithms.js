@@ -1,11 +1,11 @@
-import { dfs } from '../Algorithms/dfs';
-import { astar, getShortestPathAStar } from '../Algorithms/astar';
-import { bfs } from '../Algorithms/bfs';
+import { dfs } from '../Algorithms/Searching/dfs';
+import { astar, getShortestPathAStar } from '../Algorithms/Searching/astar';
+import { bfs } from '../Algorithms/Searching/bfs';
 import {
   bidrectionalBFS,
   getShortestPathBiDirectional,
-} from '../Algorithms/bidirectionalBFS';
-import { dijkstra } from '../Algorithms/dijkstra';
+} from '../Algorithms/Searching/bidirectionalBFS';
+import { dijkstra } from '../Algorithms/Searching/dijkstra';
 import { getShortestPath } from '../Ulilities/gridFunctions';
 
 const algorithms = [
