@@ -187,6 +187,13 @@ body {
   margin-right: 1rem;
 }
 
+/*  */
+
+#temp {
+  display: flex;
+  justify-content: center;
+}
+
 .node {
   height: 25px;
   transition: all 0.5s ease-in;
@@ -197,7 +204,6 @@ body {
 
 .grid {
   margin-top: 10rem;
-  margin-left: 2rem;
 }
 
 .row {

@@ -3,6 +3,9 @@ import { useNavbarContext } from '../Context/NavbarContext';
 
 const Navbar = () => {
   const { openSubmenu, closeSubmenu } = useNavbarContext();
+
+  const setAlgorithm = (e) => {};
+
   const displaySubmenu = (e) => {
     const page = e.target.textContent;
     const tempBtn = e.target.getBoundingClientRect();

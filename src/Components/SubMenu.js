@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavbarContext } from '../Context/NavbarContext';
+import { useSearchingContext } from '../Context/SearchingContext';
 
 const Submenu = () => {
   const {
@@ -7,6 +8,12 @@ const Submenu = () => {
     page: { page, links },
     location,
   } = useNavbarContext();
+  const { setSearchingAlgorithm } = useSearchingContext();
+
+  const setAlgorithm = (e) => {
+    setSearchingAlgorithm(e.target.textContent);
+  };
+
   const container = useRef(null);
   const [columns, setColumns] = useState('col-2');
   useEffect(() => {
@@ -32,9 +39,9 @@ const Submenu = () => {
         <h4>{page}</h4>
         <div className={`submenu-center ${columns}`}>
           {links.map((link, index) => {
-            const { url, icon, label } = link;
+            const { icon, label } = link;
             return (
-              <button key={index}>
+              <button key={index} onClick={(e) => setAlgorithm(e)}>
                 {icon}
                 {label}
               </button>

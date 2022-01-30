@@ -18,6 +18,7 @@ export const bidrectionalBFS = (grid, startNode, endNode) => {
         if (visitedB.has(nodesA[i])) {
           startNode.previousNode = null;
           endNode.previousNode = null;
+          nodesInOrder.push(nodesA[i]);
           return { nodes: nodesInOrder, middleA: nodeA, middleB: nodesA[i] };
         }
         queueA.push(nodesA[i]);
@@ -32,6 +33,7 @@ export const bidrectionalBFS = (grid, startNode, endNode) => {
       let nodesB = getNeighbours(grid, nodeB, visitedB);
       for (let i = 0; i < nodesB.length; i++) {
         if (visitedA.has(nodesB[i])) {
+          nodesInOrder.push(nodesB[i]);
           startNode.previousNode = null;
           endNode.previousNode = null;
           return { nodes: nodesInOrder, middleA: nodesB[i], middleB: nodeB };

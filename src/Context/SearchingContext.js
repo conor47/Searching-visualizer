@@ -7,9 +7,9 @@ import algorithms from '../Data/algorithms';
 const searchingContext = React.createContext();
 
 const initialState = {
-  grid: [],
-  startNode: null,
-  endNode: null,
+  grid: generateGrid(),
+  startNode: [7, 10],
+  endNode: [7, 40],
   searchingAlgorithm: null,
   shortestPathAlgorithm: null,
 };
@@ -18,7 +18,9 @@ export const SearchProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const setSearchingAlgorithm = (text) => {
-    const algorithm = algorithms.find((algo) => algo.name === 'text');
+    const algorithm = algorithms.find(
+      (algo) => algo.name === `${text.toLowerCase()}`
+    );
     dispatch({ type: 'SET_SEARCH', payload: { algorithm } });
   };
 
@@ -30,9 +32,19 @@ export const SearchProvider = ({ children }) => {
     dispatch({ type: 'SET_END', payload: { endNode: node } });
   };
 
+  const updateGrid = (newGrid) => {
+    dispatch({ type: 'UPDATE_GRID', payload: { newGrid } });
+  };
+
   return (
     <searchingContext.Provider
-      value={{ ...state, setSearchingAlgorithm, setStartNode, setEndNode }}
+      value={{
+        ...state,
+        setSearchingAlgorithm,
+        setStartNode,
+        setEndNode,
+        updateGrid,
+      }}
     >
       {children}
     </searchingContext.Provider>

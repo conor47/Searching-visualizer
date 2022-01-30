@@ -9,23 +9,25 @@ import {
 } from '../Algorithms/bidirectionalBFS';
 import { astar, getShortestPathAStar } from '../Algorithms/astar';
 import { useNavbarContext } from '../Context/NavbarContext';
+import { useSearchingContext } from '../Context/SearchingContext';
+import { generateGrid } from '../Ulilities/gridFunctions';
 
 const PathFinding = () => {
-  const [grid, setGrid] = useState([]);
+  // const [grid, setGrid] = useState([]);
   const [start, setStart] = useState([7, 10]);
   const [end, setEnd] = useState([7, 40]);
   const [moveEnd, setMoveEnd] = useState(false);
   const [moveStart, setMoveStart] = useState(false);
   const [mouseDown, setMouseDown] = useState(false);
 
+  const { grid, startNode, endNode, updateGrid } = useSearchingContext();
   const { closeSubmenu } = useNavbarContext();
 
   useEffect(() => {
-    setGrid(generateGrid());
     document.getElementById('temp').ondragstart = function () {
       return false;
     };
-  }, []);
+  }, [grid]);
 
   const runDijkstra = () => {
     clearVisited();
@@ -59,7 +61,7 @@ const PathFinding = () => {
       return;
     }
     setMouseDown(true);
-    generateUpdatedGrid(row, col);
+    updateWall(row, col);
   };
 
   const handleMouseUp = (row, col) => {
@@ -78,7 +80,7 @@ const PathFinding = () => {
     }
 
     if (mouseDown) {
-      generateUpdatedGrid(row, col);
+      updateWall(row, col);
     }
   };
 
@@ -181,17 +183,17 @@ const PathFinding = () => {
     }
   };
 
-  const generateGrid = () => {
-    let grid = [];
-    for (let i = 0; i < 20; i++) {
-      let row = [];
-      for (let j = 0; j < 50; j++) {
-        row.push(createNode(i, j));
-      }
-      grid.push(row);
-    }
-    return grid;
-  };
+  // const generateGrid = () => {
+  //   let grid = [];
+  //   for (let i = 0; i < 20; i++) {
+  //     let row = [];
+  //     for (let j = 0; j < 50; j++) {
+  //       row.push(createNode(i, j));
+  //     }
+  //     grid.push(row);
+  //   }
+  //   return grid;
+  // };
 
   const moveStartNode = (row, col) => {
     const newGrid = grid.slice();
@@ -205,7 +207,7 @@ const PathFinding = () => {
     newGrid[row][col] = newUpdatedStart;
 
     setStart([row, col]);
-    setGrid(newGrid);
+    updateGrid(newGrid);
   };
 
   const moveEndNode = (row, col) => {
@@ -220,10 +222,10 @@ const PathFinding = () => {
     newGrid[row][col] = newUpdatedEnd;
 
     setEnd([row, col]);
-    setGrid(newGrid);
+    updateGrid(newGrid);
   };
 
-  const generateUpdatedGrid = (row, col) => {
+  const updateWall = (row, col) => {
     if (
       (row === start[0] && col === start[1]) ||
       (row === end[0] && col === end[1])
@@ -234,7 +236,7 @@ const PathFinding = () => {
     const newGrid = grid.slice();
     const newNode = { ...node, isWall: !node.isWall };
     newGrid[row][col] = newNode;
-    setGrid(newGrid);
+    updateGrid(newGrid);
   };
 
   const createNode = (row, col) => {
@@ -266,7 +268,7 @@ const PathFinding = () => {
       }
       newGrid.push(row);
     }
-    setGrid(newGrid);
+    updateGrid(newGrid);
   };
 
   const clearVisited = () => {
@@ -284,12 +286,12 @@ const PathFinding = () => {
       }
       newGrid.push(row);
     }
-    setGrid(newGrid);
+    updateGrid(newGrid);
   };
 
   return (
     <div onMouseOver={closeSubmenu} id="temp">
-      <navbar>
+      {/* <navbar>
         <div className="controls">
           <button onClick={() => runDijkstra()}>Dijkstra</button>
         </div>
@@ -310,40 +312,41 @@ const PathFinding = () => {
         <div className="controls">
           <button onClick={() => clearWalls()}>Clear Walls</button>
         </div>
-      </navbar>
+      </navbar> */}
       <div className="grid">
-        {grid.map((row, i) => {
-          return (
-            <div className="row" key={i}>
-              {row.map((node, j) => {
-                const {
-                  row,
-                  col,
-                  isWall,
-                  isEnd,
-                  isStart,
-                  isVisited,
-                  previousNode,
-                } = grid[i][j];
-                return (
-                  <Node
-                    key={j}
-                    row={row}
-                    col={col}
-                    isStart={isStart}
-                    isEnd={isEnd}
-                    isVisited={isVisited}
-                    prevousNode={previousNode}
-                    handleMouseEnter={handleMouseEnter}
-                    handleMouseDown={handleMouseDown}
-                    handleMouseUp={handleMouseUp}
-                    isWall={isWall}
-                  />
-                );
-              })}
-            </div>
-          );
-        })}
+        {grid &&
+          grid.map((row, i) => {
+            return (
+              <div className="row" key={i}>
+                {row.map((node, j) => {
+                  const {
+                    row,
+                    col,
+                    isWall,
+                    isEnd,
+                    isStart,
+                    isVisited,
+                    previousNode,
+                  } = grid[i][j];
+                  return (
+                    <Node
+                      key={j}
+                      row={row}
+                      col={col}
+                      isStart={isStart}
+                      isEnd={isEnd}
+                      isVisited={isVisited}
+                      prevousNode={previousNode}
+                      handleMouseEnter={handleMouseEnter}
+                      handleMouseDown={handleMouseDown}
+                      handleMouseUp={handleMouseUp}
+                      isWall={isWall}
+                    />
+                  );
+                })}
+              </div>
+            );
+          })}
       </div>
     </div>
   );
