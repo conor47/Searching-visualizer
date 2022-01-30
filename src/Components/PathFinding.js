@@ -223,6 +223,9 @@ const PathFinding = () => {
       isVisited: false,
       previousNode: null,
       isWall: false,
+      gCost: 0,
+      hCost: 0,
+      fCost: 0,
     };
   };
 
