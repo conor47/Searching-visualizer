@@ -8,6 +8,7 @@ const PathFinding = () => {
   const [moveEnd, setMoveEnd] = useState(false);
   const [moveStart, setMoveStart] = useState(false);
   const [mouseDown, setMouseDown] = useState(false);
+  const [addWall, setAddWall] = useState(false);
 
   const {
     grid,
@@ -34,15 +35,21 @@ const PathFinding = () => {
       setMouseDown(true);
       setMoveEnd(true);
       return;
+    } else if (grid[row][col].isWall) {
+      setMouseDown(true);
+      updateWall(row, col, start, end, grid, updateGrid, addWall);
+    } else {
+      setMouseDown(true);
+      setAddWall(true);
+      updateWall(row, col, start, end, grid, updateGrid, addWall);
     }
-    setMouseDown(true);
-    updateWall(row, col, start, end, grid, updateGrid);
   };
 
-  const handleMouseUp = (row, col) => {
+  const handleMouseUp = () => {
     setMouseDown(false);
     setMoveStart(false);
     setMoveEnd(false);
+    setAddWall(false);
   };
 
   const handleMouseEnter = (row, col) => {
@@ -55,7 +62,7 @@ const PathFinding = () => {
     }
 
     if (mouseDown) {
-      updateWall(row, col, start, end, grid, updateGrid);
+      updateWall(row, col, start, end, grid, updateGrid, addWall);
     }
   };
 

@@ -107,7 +107,7 @@ export const getShortestPath = (endNode) => {
   return nodes;
 };
 
-export const updateWall = (row, col, start, end, grid, updateGrid) => {
+export const updateWall = (row, col, start, end, grid, updateGrid, addWall) => {
   if (
     (row === start[0] && col === start[1]) ||
     (row === end[0] && col === end[1])
@@ -116,7 +116,7 @@ export const updateWall = (row, col, start, end, grid, updateGrid) => {
   }
   const node = grid[row][col];
   const newGrid = grid.slice();
-  const newNode = { ...node, isWall: !node.isWall };
+  const newNode = { ...node, isWall: addWall };
   newGrid[row][col] = newNode;
   updateGrid(newGrid);
 };
@@ -125,7 +125,9 @@ export const cleanGrid = (grid) => {
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[0].length; j++) {
       document.getElementById(`${i}-${j}`).classList.remove('visited');
-      document.getElementById(`${i}-${j}`).classList.remove('shortest');
+      document
+        .getElementById(`${i}-${j}`)
+        .classList.remove('<shortest></shortest>');
     }
   }
 };
