@@ -22,6 +22,9 @@ const PathFinding = () => {
 
   useEffect(() => {
     setGrid(generateGrid());
+    document.getElementById('temp').ondragstart = function () {
+      return false;
+    };
   }, []);
 
   const runDijkstra = () => {
@@ -285,7 +288,7 @@ const PathFinding = () => {
   };
 
   return (
-    <div onMouseOver={closeSubmenu}>
+    <div onMouseOver={closeSubmenu} id="temp">
       <navbar>
         <div className="controls">
           <button onClick={() => runDijkstra()}>Dijkstra</button>

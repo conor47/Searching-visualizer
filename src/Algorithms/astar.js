@@ -49,7 +49,6 @@ export const astar = (grid, startNode, endNode) => {
 
         if (!openSet.find((node) => node === nei)) {
           openSet.push(nei);
-          nodesInOrder.push(nei);
         }
       }
     }
@@ -59,12 +58,13 @@ export const astar = (grid, startNode, endNode) => {
 const getDistance = (nodeA, nodeB) => {
   const distX = Math.abs(nodeA.col - nodeB.col);
   const distY = Math.abs(nodeA.row - nodeB.row);
+  return distX + distY;
 
-  if (distX > distY) {
-    return 14 * distY + 10 * (distX - distY);
-  } else {
-    return 14 * distX + 10 * (distY - distX);
-  }
+  //   if (distX > distY) {
+  //     return 14 * distY + 10 * (distX - distY);
+  //   } else {
+  //     return 14 * distX + 10 * (distY - distX);
+  //   }
 };
 
 const getNeighbours = (grid, node) => {
@@ -82,18 +82,18 @@ const getNeighbours = (grid, node) => {
   if (col < grid[0].length - 1) {
     nodes.push(grid[row][col + 1]);
   }
-  if (col > 0 && row > 0) {
-    nodes.push(grid[row - 1][col - 1]);
-  }
-  if (col < grid[0].length - 1 && row > 0) {
-    nodes.push(grid[row - 1][col + 1]);
-  }
-  if (row < grid.length - 1 && col > 0) {
-    nodes.push(grid[row + 1][col - 1]);
-  }
-  if (row < grid.length - 1 && col < grid[0].length - 1) {
-    nodes.push(grid[row + 1][col + 1]);
-  }
+  //   if (col > 0 && row > 0) {
+  //     nodes.push(grid[row - 1][col - 1]);
+  //   }
+  //   if (col < grid[0].length - 1 && row > 0) {
+  //     nodes.push(grid[row - 1][col + 1]);
+  //   }
+  //   if (row < grid.length - 1 && col > 0) {
+  //     nodes.push(grid[row + 1][col - 1]);
+  //   }
+  //   if (row < grid.length - 1 && col < grid[0].length - 1) {
+  //     nodes.push(grid[row + 1][col + 1]);
+  //   }
   return nodes.filter((nei) => !nei.isWall);
 };
 
