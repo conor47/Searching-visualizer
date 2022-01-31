@@ -4,6 +4,7 @@ import Node from './Node';
 import { useNavbarContext } from '../Context/NavbarContext';
 import { useSearchingContext } from '../Context/SearchingContext';
 import { updateWall } from '../Ulilities/gridFunctions';
+import information from '../Data/information';
 
 const PathFinding = () => {
   const [moveEnd, setMoveEnd] = useState(false);
@@ -98,7 +99,21 @@ const PathFinding = () => {
   };
 
   return (
-    <div onMouseOver={closeSubmenu} id="temp">
+    <div onMouseOver={closeSubmenu} id="temp" className="wrapper">
+      <div className="information-wrapper">
+        <div className="information">
+          {information.map((info, idx) => {
+            const { text, icon } = info;
+            return (
+              <div key={idx} className="information-sub">
+                {icon}
+                <span>{text}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       <div className="grid">
         {grid &&
           grid.map((row, i) => {

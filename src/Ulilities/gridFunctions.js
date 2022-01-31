@@ -75,7 +75,7 @@ export const animatePath = (path, shortestPath, speed) => {
   for (let i = 0; i < path.length; i++) {
     if (i === path.length - 1) {
       setTimeout(() => {
-        animateShortest(shortestPath);
+        animateShortest(shortestPath, speed);
       }, i * speed);
     }
     setTimeout(() => {
@@ -87,14 +87,14 @@ export const animatePath = (path, shortestPath, speed) => {
   }
 };
 
-export const animateShortest = (path) => {
+export const animateShortest = (path, speed) => {
   for (let i = 0; i < path.length; i++) {
     setTimeout(() => {
       let node = path[i];
       document
         .getElementById(`${node.row}-${node.col}`)
         .classList.add('shortest');
-    }, i * 50);
+    }, i * (speed * 5));
   }
 };
 

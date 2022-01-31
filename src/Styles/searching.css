@@ -69,11 +69,21 @@ body {
   height: 5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background-color: #0a192f;
   position: relative;
   z-index: 1;
 }
+.nav-left {
+  margin-left: 2rem;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.nav-right {
+  margin-right: 2rem;
+}
+
 .nav-links {
   display: block;
   justify-self: center;
@@ -85,6 +95,7 @@ body {
   list-style: none;
   align-items: center;
 }
+
 .nav-links li {
   height: 100%;
 }
@@ -96,6 +107,7 @@ body {
   color: white;
   text-transform: capitalize;
   letter-spacing: 1px;
+  transition: var(--transition);
   width: 10rem;
 }
 
@@ -187,10 +199,47 @@ body {
   margin-right: 1rem;
 }
 
-/*  */
+/* Information  */
+
+.information-wrapper {
+  display: flex;
+  justify-content: start;
+  min-width: 100%;
+  margin-top: 3rem;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 10rem;
+  min-width: 50%;
+  overflow-y: hidden;
+}
+
+.information svg {
+  margin-right: 2rem;
+}
+
+.information-sub {
+  color: white;
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
+  max-width: 100%;
+}
+
+/* Grid styles */
+
+.grid {
+  margin-top: 5rem;
+}
 
 #temp {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 84vw;
+  margin: auto;
   justify-content: center;
 }
 
@@ -200,10 +249,6 @@ body {
   width: 20px;
   background-color: white;
   border: 1px solid skyblue;
-}
-
-.grid {
-  margin-top: 10rem;
 }
 
 .row {

@@ -12,7 +12,7 @@ const App = () => {
       <Navbar />
       <Submenu />
       <Routes>
-        <Route path="/searching" element={<PathFinding />} />
+        <Route path="/" element={<PathFinding />} />
         <Route path="/sorting" element={<Sorting />} />
       </Routes>
     </Router>
