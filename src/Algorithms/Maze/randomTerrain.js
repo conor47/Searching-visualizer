@@ -7,10 +7,12 @@ export const randomTerrain = (grid, start, end) => {
         (i === start.row && j === start.col) ||
         (i === end.row && j === end.col)
       ) {
+        const copy = grid[i][j];
+        row.push({ ...copy });
         continue;
       }
       const oldNode = grid[i][j];
-      const rand = getRand(0, 1);
+      const rand = getRand(0, 2);
       const updatedNode = { ...oldNode, isWall: rand === 0 };
       row.push(updatedNode);
     }

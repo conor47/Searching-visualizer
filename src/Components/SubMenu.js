@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavbarContext } from '../Context/NavbarContext';
 import { useSearchingContext } from '../Context/SearchingContext';
+import { randomTerrain } from '../Algorithms/Maze/randomTerrain';
+import { terrainGenerator } from '../Ulilities/gridFunctions';
 
 const Submenu = () => {
   const {
@@ -8,7 +10,14 @@ const Submenu = () => {
     page: { page, links },
     location,
   } = useNavbarContext();
-  const { setSearchingAlgorithm, setSpeed } = useSearchingContext();
+  const {
+    setSearchingAlgorithm,
+    setSpeed,
+    updateGrid,
+    grid,
+    startNode,
+    endNode,
+  } = useSearchingContext();
 
   const handleUpdate = (e, menu) => {
     if (menu === 'algos') {
@@ -21,6 +30,8 @@ const Submenu = () => {
       } else {
         setSpeed(20);
       }
+    } else if (menu === 'terrain') {
+      terrainGenerator(grid, startNode, endNode, randomTerrain, updateGrid);
     }
   };
 

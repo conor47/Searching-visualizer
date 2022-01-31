@@ -168,3 +168,17 @@ export const clearVisited = (grid) => {
     }
   }
 };
+
+export const terrainGenerator = (
+  grid,
+  startNode,
+  endNode,
+  genFunction,
+  updateGrid
+) => {
+  const start = grid[startNode[0]][startNode[1]];
+  const end = grid[endNode[0]][endNode[1]];
+
+  const newGrid = genFunction(grid, start, end);
+  updateGrid(newGrid);
+};
