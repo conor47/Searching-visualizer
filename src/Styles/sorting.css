@@ -50,13 +50,14 @@ body {
   cursor: pointer;
   background-color: #020c1b;
   border: none;
-  color: #64ffda;
+  color: white;
   font-size: 1.2rem;
   transition: 0.3s ease-in-out;
 }
 
 .buttons button:hover {
   opacity: 0.7;
+  color: #64ffda;
 }
 
 .slider-container {
@@ -75,7 +76,7 @@ input {
 
 label {
   display: inline-block;
-  color: #64ffda;
+  color: white;
   font-size: 1.2rem;
   min-width: 50px;
   text-align: left;

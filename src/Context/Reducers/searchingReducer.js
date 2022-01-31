@@ -10,6 +10,12 @@ const searchingReducer = (state, action) => {
       return { ...state, endNode: action.payload.endNode };
     case 'SET_SPEED':
       return { ...state, speed: action.payload.speed };
+    case 'SET_METRICS':
+      const newMetrics = {
+        speed: action.payload.speed,
+        count: action.payload.count,
+      };
+      return { ...state, metrics: newMetrics };
     default:
       return { ...state };
   }

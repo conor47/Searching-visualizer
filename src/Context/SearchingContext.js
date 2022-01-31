@@ -12,6 +12,7 @@ const initialState = {
   endNode: [7, 48],
   searchingAlgorithm: null,
   speed: 10,
+  metrics: null,
 };
 
 export const SearchProvider = ({ children }) => {
@@ -40,6 +41,9 @@ export const SearchProvider = ({ children }) => {
     dispatch({ type: 'SET_SPEED', payload: { speed } });
   };
 
+  const updateMetrics = (time, count) => {
+    dispatch({ type: 'SET_METRICS', payload: { time, count } });
+  };
   return (
     <searchingContext.Provider
       value={{

@@ -3,16 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { useNavbarContext } from '../Context/NavbarContext';
 import { useSearchingContext } from '../Context/SearchingContext';
-import {
-  runAlgorithm,
-  cleanGrid,
-  clearWalls,
-  resetGrid,
-} from '../Ulilities/gridFunctions';
+import { runAlgorithm, cleanGrid } from '../Ulilities/gridFunctions';
 
 const Navbar = () => {
   const { openSubmenu, closeSubmenu } = useNavbarContext();
-  const { grid, searchingAlgorithm, startNode, endNode, updateGrid, speed } =
+  const { grid, searchingAlgorithm, startNode, endNode, speed } =
     useSearchingContext();
   const path = useLocation().pathname;
   const algoRef = useRef(null);
@@ -36,7 +31,7 @@ const Navbar = () => {
   const startRunning = () => {
     if (!searchingAlgorithm) {
       setTimeout(() => {
-        algoRef.current.style.color = '#48c9b0';
+        algoRef.current.style.color = '#F64C72';
         setTimeout(() => {
           algoRef.current.style.color = 'white';
         }, 1000);
@@ -92,6 +87,11 @@ const Navbar = () => {
                 terrain
               </button>
             </li>
+            <li>
+              <button className="link-btn" onMouseOver={displaySubmenu}>
+                clear
+              </button>
+            </li>
           </ul>
         </div>
       )}
@@ -99,9 +99,6 @@ const Navbar = () => {
         <div className="nav-right">
           <button className="btn" onClick={() => startRunning()}>
             Run
-          </button>
-          <button className="btn" onClick={() => resetGrid(updateGrid)}>
-            Reset
           </button>
         </div>
       )}

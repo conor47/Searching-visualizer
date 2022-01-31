@@ -117,11 +117,22 @@ const PathFinding = () => {
         <div className="information-algo">
           {searchingAlgorithm &&
             algoInformation.map((info, idx) => {
-              const { name, text } = info;
+              const { name, text, complexity, url } = info;
               if (name === searchingAlgorithm.name) {
                 return (
                   <div className="information-sub">
-                    <span>{text}</span>
+                    <p>{text}</p>
+                    <p>{complexity}</p>
+                    <p>
+                      See more{' '}
+                      <a
+                        className="information-link"
+                        href={url}
+                        target="_blank"
+                      >
+                        here
+                      </a>
+                    </p>
                   </div>
                 );
               }

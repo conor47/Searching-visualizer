@@ -20,7 +20,6 @@ export const resetGrid = (updateGrid) => {
       document.getElementById(`${i}-${j}`).classList.remove('shortest');
     }
   }
-
   updateGrid(newGrid);
 };
 
@@ -80,11 +79,14 @@ export const runAlgorithm = (
     grid[endNode[0]][endNode[1]]
   );
   const shortestPathNodes = shortestPath(grid[endNode[0]][endNode[1]]);
-  animatePath(nodes, shortestPathNodes, speed);
+  animatePath(nodes, shortestPathNodes.reverse(), speed);
 };
 
 export const animatePath = (path, shortestPath, speed) => {
   for (let i = 0; i < path.length; i++) {
+    if (path[i].isStart) {
+      continue;
+    }
     if (i === path.length - 1) {
       setTimeout(() => {
         animateShortest(shortestPath, speed);

@@ -2,7 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavbarContext } from '../Context/NavbarContext';
 import { useSearchingContext } from '../Context/SearchingContext';
 import { randomTerrain } from '../Algorithms/Maze/randomTerrain';
-import { terrainGenerator } from '../Ulilities/gridFunctions';
+import {
+  terrainGenerator,
+  resetGrid,
+  clearWalls,
+} from '../Ulilities/gridFunctions';
 
 const Submenu = () => {
   const {
@@ -32,6 +36,12 @@ const Submenu = () => {
       }
     } else if (menu === 'terrain') {
       terrainGenerator(grid, startNode, endNode, randomTerrain, updateGrid);
+    } else if (menu === 'controls') {
+      if (e.target.textContent === 'clear all') {
+        resetGrid(updateGrid);
+      } else if (e.target.textContent === 'clear walls') {
+        clearWalls(grid, updateGrid);
+      }
     }
   };
 

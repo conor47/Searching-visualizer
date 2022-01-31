@@ -1,5 +1,7 @@
+import { doesPathExist } from '../Searching/doesPathExist';
+
 export const randomTerrain = (grid, start, end) => {
-  const newGrid = [];
+  let newGrid = [];
   for (let i = 0; i < grid.length; i++) {
     const row = [];
     for (let j = 0; j < grid[0].length; j++) {
@@ -17,6 +19,10 @@ export const randomTerrain = (grid, start, end) => {
       row.push(updatedNode);
     }
     newGrid.push(row);
+  }
+  const path = doesPathExist(start, end, grid);
+  if (!path) {
+    newGrid = randomTerrain(grid, start, end);
   }
   return newGrid;
 };
