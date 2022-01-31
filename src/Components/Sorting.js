@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './sortingvisualizer.css';
-import { useStateContext } from '../Context/SortingContext';
+import { useSortingContext } from '../Context/SortingContext';
 import runBubbleSort from '../Algorithms/SortingRunners/runBubbleSort';
 import runQuickSort from '../Algorithms/SortingRunners/runQuickSort';
 import runSelectionSort from '../Algorithms/SortingRunners/runSelectionSort';
 import runInsertionSort from '../Algorithms/SortingRunners/runInsertionSort';
 import runMergeSort from '../Algorithms/SortingRunners/runMergeSort';
+import { useNavbarContext } from '../Context/NavbarContext';
 
 const SortingVisualizer = () => {
-  const { array, newArray, running, setRunning } = useStateContext();
+  const { array, newArray, running, setRunning } = useSortingContext();
   const [speedSlider, setSpeedSlider] = useState(-10);
   const [sizeSlider, setSizeSlider] = useState(155);
   const [arraySize, setArraySize] = useState(155);
   const [sortingSpeed, setSortingSpeed] = useState(-10);
   const [barWidth, setBarWidth] = useState('1px');
+  const { closeSubmenu } = useNavbarContext();
   const containerRef = useRef(null);
   const [arrayBars, setArrayBars] = useState(
     document.getElementsByClassName('array-bar')
@@ -47,7 +48,7 @@ const SortingVisualizer = () => {
 
   return (
     <>
-      <div className="center">
+      <div className="center" onMouseEnter={() => closeSubmenu()}>
         <div className="array-container" ref={containerRef}>
           {array.map((val, idx) => {
             return (

@@ -6,11 +6,21 @@ import {
   cleanGrid,
   clearWalls,
 } from '../Ulilities/gridFunctions';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const { openSubmenu, closeSubmenu } = useNavbarContext();
   const { grid, searchingAlgorithm, startNode, endNode, updateGrid } =
     useSearchingContext();
+  const path = useLocation().pathname;
+
+  const renderLink = () => {
+    if (path.substring(1) === 'searching') {
+      return <Link to="/sorting">Sorting</Link>;
+    } else {
+      return <Link to="/searching">Searching</Link>;
+    }
+  };
 
   const startRunning = () => {
     if (!searchingAlgorithm) {
@@ -36,6 +46,7 @@ const Navbar = () => {
   return (
     <nav className="nav" onMouseOver={handleSubmenu}>
       <div className="nav-center">
+        {renderLink()}
         <ul className="nav-links">
           <li>
             <button className="link-btn" onMouseOver={displaySubmenu}>

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { generateArray } from '../Ulilities/arrayFunctions/generateArray';
+import { generateArray } from '../Ulilities/arrayFunctions';
 import reducer from './Reducers/sortingReducer';
 
 const initialState = {
@@ -7,9 +7,9 @@ const initialState = {
   running: false,
 };
 
-const stateContext = createContext();
+const sortingContext = createContext();
 
-export const StateProvider = ({ children }) => {
+export const SortingProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const setRunning = (isRunning) => {
@@ -21,12 +21,12 @@ export const StateProvider = ({ children }) => {
   };
 
   return (
-    <stateContext.Provider value={{ ...state, setRunning, newArray }}>
+    <sortingContext.Provider value={{ ...state, setRunning, newArray }}>
       {children}
-    </stateContext.Provider>
+    </sortingContext.Provider>
   );
 };
 
-export const useStateContext = () => {
-  return useContext(stateContext);
+export const useSortingContext = () => {
+  return useContext(sortingContext);
 };

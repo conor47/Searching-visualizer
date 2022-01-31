@@ -1,4 +1,4 @@
-import quickSortIterative from '../Sorting/quicksort';
+import quickSortIterative from '../Sorting/quickSort';
 
 const runQuickSort = (array, arrayBars, sortingSpeed, setRunning) => {
   const animations = quickSortIterative(array.slice(), 0, array.length - 1);
