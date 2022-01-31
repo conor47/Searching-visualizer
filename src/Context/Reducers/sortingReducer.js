@@ -1,4 +1,4 @@
-import { generateArray } from '../utilities/generateArray';
+import { generateArray } from '../../Ulilities/arrayFunctions/generateArray';
 
 const stateReducer = (state, action) => {
   switch (action.type) {

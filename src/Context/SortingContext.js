@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { generateArray } from '../utilities/generateArray';
-import reducer from './reducer';
+import { generateArray } from '../Ulilities/arrayFunctions/generateArray';
+import reducer from './Reducers/sortingReducer';
 
 const initialState = {
   array: generateArray(165),
