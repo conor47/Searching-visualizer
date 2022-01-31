@@ -5,6 +5,7 @@ import { useNavbarContext } from '../Context/NavbarContext';
 import { useSearchingContext } from '../Context/SearchingContext';
 import { updateWall } from '../Ulilities/gridFunctions';
 import information from '../Data/information';
+import algoInformation from '../Data/algorithmInformatoin';
 
 const PathFinding = () => {
   const [moveEnd, setMoveEnd] = useState(false);
@@ -19,6 +20,7 @@ const PathFinding = () => {
     setEndNode,
     startNode: start,
     endNode: end,
+    searchingAlgorithm,
   } = useSearchingContext();
   const { closeSubmenu } = useNavbarContext();
 
@@ -101,7 +103,7 @@ const PathFinding = () => {
   return (
     <div onMouseOver={closeSubmenu} id="temp" className="wrapper">
       <div className="information-wrapper">
-        <div className="information">
+        <div className="information-general">
           {information.map((info, idx) => {
             const { text, icon } = info;
             return (
@@ -111,6 +113,19 @@ const PathFinding = () => {
               </div>
             );
           })}
+        </div>
+        <div className="information-algo">
+          {searchingAlgorithm &&
+            algoInformation.map((info, idx) => {
+              const { name, text } = info;
+              if (name === searchingAlgorithm.name) {
+                return (
+                  <div className="information-sub">
+                    <span>{text}</span>
+                  </div>
+                );
+              }
+            })}
         </div>
       </div>
 

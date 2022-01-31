@@ -208,7 +208,7 @@ body {
   margin-top: 3rem;
 }
 
-.information {
+.information-general {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -217,14 +217,21 @@ body {
   overflow-y: hidden;
 }
 
-.information svg {
+.information-algo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 50%;
+}
+
+.information-general svg {
   margin-right: 2rem;
 }
 
 .information-sub {
-  color: white;
+  color: #4b5872;
   font-size: 1.1rem;
-  padding: 0.5rem 0;
+  padding: 0.8rem 0;
   max-width: 100%;
 }
 

@@ -91,7 +91,7 @@ const Navbar = () => {
       )}
       {path === '/' && (
         <div className="nav-right">
-          <button className="btn" onClic k={() => startRunning()}>
+          <button className="btn" onClick={() => startRunning()}>
             Run
           </button>
           <button className="btn" onClick={() => clearWalls(grid, updateGrid)}>
