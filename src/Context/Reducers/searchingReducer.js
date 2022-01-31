@@ -8,6 +8,8 @@ const searchingReducer = (state, action) => {
       return { ...state, startNode: action.payload.startNode };
     case 'SET_END':
       return { ...state, endNode: action.payload.endNode };
+    case 'SET_SPEED':
+      return { ...state, speed: action.payload.speed };
     default:
       return { ...state };
   }

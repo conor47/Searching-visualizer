@@ -1,8 +1,8 @@
 body {
   background-color: #02060a;
-  max-height: 100vh;
+  /* max-height: 100vh;
   overflow-y: hidden;
-  overflow-x: hidden;
+  overflow-x: hidden; */
 }
 
 .center {

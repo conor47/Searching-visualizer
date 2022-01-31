@@ -11,6 +11,7 @@ const initialState = {
   startNode: [7, 10],
   endNode: [7, 40],
   searchingAlgorithm: null,
+  speed: 10,
 };
 
 export const SearchProvider = ({ children }) => {
@@ -35,12 +36,17 @@ export const SearchProvider = ({ children }) => {
     dispatch({ type: 'UPDATE_GRID', payload: { newGrid } });
   };
 
+  const setSpeed = (speed) => {
+    dispatch({ type: 'SET_SPEED', payload: { speed } });
+  };
+
   return (
     <searchingContext.Provider
       value={{
         ...state,
         setSearchingAlgorithm,
         setStartNode,
+        setSpeed,
         setEndNode,
         updateGrid,
       }}

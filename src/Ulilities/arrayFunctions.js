@@ -5,7 +5,7 @@ export const generateRand = (min, max) => {
 export const generateArray = (size) => {
   let arr = [];
   for (let i = 0; i < size; i++) {
-    arr.push(generateRand(5, 600));
+    arr.push(generateRand(5, 500));
   }
   return arr;
 };

@@ -8,21 +8,31 @@ const Submenu = () => {
     page: { page, links },
     location,
   } = useNavbarContext();
-  const { setSearchingAlgorithm } = useSearchingContext();
+  const { setSearchingAlgorithm, setSpeed } = useSearchingContext();
 
-  const setAlgorithm = (e) => {
-    setSearchingAlgorithm(e.target.textContent);
+  const handleUpdate = (e, menu) => {
+    if (menu === 'algos') {
+      setSearchingAlgorithm(e.target.textContent);
+    } else if (menu === 'speed') {
+      if (e.target.textContent === 'fast') {
+        setSpeed(3);
+      } else if (e.target.textContent === 'medium') {
+        setSpeed(10);
+      } else {
+        setSpeed(20);
+      }
+    }
   };
 
   const container = useRef(null);
   const [columns, setColumns] = useState('col-2');
+
   useEffect(() => {
     setColumns('col-2');
     const submenu = container.current;
     const { center, bottom } = location;
     submenu.style.left = `${center}px`;
     submenu.style.top = `${bottom}px`;
-    console.log(links);
     if (links.length === 3) {
       setColumns('col-3');
     }
@@ -39,9 +49,9 @@ const Submenu = () => {
         <h4>{page}</h4>
         <div className={`submenu-center ${columns}`}>
           {links.map((link, index) => {
-            const { icon, label } = link;
+            const { icon, label, menu } = link;
             return (
-              <button key={index} onClick={(e) => setAlgorithm(e)}>
+              <button key={index} onClick={(e) => handleUpdate(e, menu)}>
                 {icon}
                 {label}
               </button>

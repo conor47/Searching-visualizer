@@ -4,27 +4,20 @@ const sublinks = [
   {
     page: 'algorithms',
     links: [
-      { label: 'BFS', icon: <FaCreditCard /> },
-      { label: 'DFS', icon: <FaCreditCard /> },
-      { label: 'Dijkstra', icon: <FaCreditCard /> },
-      { label: 'AStar', icon: <FaCreditCard /> },
-      { label: 'BidirectionalBFS', icon: <FaCreditCard /> },
+      { label: 'BFS', icon: <FaCreditCard />, menu: 'algos' },
+      { label: 'DFS', icon: <FaCreditCard />, menu: 'algos' },
+      { label: 'Dijkstra', icon: <FaCreditCard />, menu: 'algos' },
+      { label: 'AStar', icon: <FaCreditCard />, menu: 'algos' },
+      { label: 'BidirectionalBFS', icon: <FaCreditCard />, menu: 'algos' },
     ],
   },
+
   {
-    page: 'developers',
+    page: 'speed',
     links: [
-      { label: 'plugins', icon: <FaBook />, url: '/products' },
-      { label: 'libraries', icon: <FaBook />, url: '/products' },
-      { label: 'help', icon: <FaBook />, url: '/products' },
-      { label: 'billing', icon: <FaBook />, url: '/products' },
-    ],
-  },
-  {
-    page: 'company',
-    links: [
-      { label: 'about', icon: <FaBriefcase />, url: '/products' },
-      { label: 'customers', icon: <FaBriefcase />, url: '/products' },
+      { label: 'fast', icon: <FaBriefcase />, menu: 'speed' },
+      { label: 'medium', icon: <FaBriefcase />, menu: 'speed' },
+      { label: 'slow', icon: <FaBriefcase />, menu: 'speed' },
     ],
   },
 ];

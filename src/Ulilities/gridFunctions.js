@@ -2,9 +2,9 @@
 
 export const generateGrid = () => {
   let grid = [];
-  for (let i = 0; i < 21; i++) {
+  for (let i = 0; i < 25; i++) {
     let row = [];
-    for (let j = 0; j < 50; j++) {
+    for (let j = 0; j < 60; j++) {
       row.push(createNode(i, j));
     }
     grid.push(row);
@@ -36,7 +36,8 @@ export const runAlgorithm = (
   algorithm,
   startNode,
   endNode,
-  shortestPath
+  shortestPath,
+  speed
 ) => {
   if (name === 'bidirectionalbfs') {
     const { nodes, middleA, middleB } = algorithm(
@@ -49,7 +50,7 @@ export const runAlgorithm = (
       middleA,
       middleB
     );
-    animatePath(nodes, shortestPathNodes);
+    animatePath(nodes, shortestPathNodes, speed);
     return;
   } else if (name === 'dfs') {
     const nodes = algorithm(
@@ -57,7 +58,7 @@ export const runAlgorithm = (
       grid[startNode[0]][startNode[1]],
       grid[endNode[0]][endNode[1]]
     );
-    animatePath(nodes, nodes);
+    animatePath(nodes, nodes, speed);
     return;
   }
 
@@ -67,22 +68,22 @@ export const runAlgorithm = (
     grid[endNode[0]][endNode[1]]
   );
   const shortestPathNodes = shortestPath(grid[endNode[0]][endNode[1]]);
-  animatePath(nodes, shortestPathNodes);
+  animatePath(nodes, shortestPathNodes, speed);
 };
 
-export const animatePath = (path, shortestPath) => {
+export const animatePath = (path, shortestPath, speed) => {
   for (let i = 0; i < path.length; i++) {
     if (i === path.length - 1) {
       setTimeout(() => {
         animateShortest(shortestPath);
-      }, i * 10);
+      }, i * speed);
     }
     setTimeout(() => {
       let node = path[i];
       document
         .getElementById(`${node.row}-${node.col}`)
         .classList.add('visited');
-    }, i * 10);
+    }, i * speed);
   }
 };
 

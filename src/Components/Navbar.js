@@ -10,7 +10,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const { openSubmenu, closeSubmenu } = useNavbarContext();
-  const { grid, searchingAlgorithm, startNode, endNode, updateGrid } =
+  const { grid, searchingAlgorithm, startNode, endNode, updateGrid, speed } =
     useSearchingContext();
   const path = useLocation().pathname;
 
@@ -28,7 +28,15 @@ const Navbar = () => {
     }
     const { algorithm, shortestPath, name } = searchingAlgorithm;
     cleanGrid(grid);
-    runAlgorithm(name, grid, algorithm, startNode, endNode, shortestPath);
+    runAlgorithm(
+      name,
+      grid,
+      algorithm,
+      startNode,
+      endNode,
+      shortestPath,
+      speed
+    );
   };
 
   const displaySubmenu = (e) => {
@@ -55,12 +63,7 @@ const Navbar = () => {
           </li>
           <li>
             <button className="link-btn" onMouseOver={displaySubmenu}>
-              developers
-            </button>
-          </li>
-          <li>
-            <button className="link-btn" onMouseOver={displaySubmenu}>
-              company
+              speed
             </button>
           </li>
         </ul>
