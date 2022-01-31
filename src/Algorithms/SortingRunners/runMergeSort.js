@@ -1,4 +1,4 @@
-import { getMergeSortAnimations } from '../algorithms/mergeSort';
+import { getMergeSortAnimations } from '../Sorting/mergeSort';
 
 const runMergeSort = (array, arrayBars, sortingSpeed, setRunning) => {
   const animations = getMergeSortAnimations(array.slice());

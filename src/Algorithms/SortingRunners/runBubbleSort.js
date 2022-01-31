@@ -1,4 +1,4 @@
-import bubbleSort from '../algorithms/bubbleSort';
+import bubbleSort from '../Sorting/bubbleSort';
 
 const runBubbleSort = (array, arrayBars, sortingSpeed, setRunning) => {
   const animations = bubbleSort(array)[0];

@@ -1,4 +1,4 @@
-import insertionSort from '../algorithms/insertionSort';
+import insertionSort from '../Sorting/insertionSort';
 
 const runInsertionSort = (array, arrayBars, sortingSpeed, setRunning) => {
   const animations = insertionSort(array)[0];

@@ -1,4 +1,4 @@
-import selectionSort from '../algorithms/selectionSort';
+import selectionSort from '../Sorting/selectionSort';
 
 const runSelectionSort = (array, arrayBars, sortingSpeed, setRunning) => {
   const animations = selectionSort(array)[0];
