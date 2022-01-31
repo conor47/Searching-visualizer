@@ -76,8 +76,16 @@ body {
 }
 .nav-left {
   margin-left: 2rem;
-  color: white;
+  color: #48c9b0;
   font-size: 1.1rem;
+  padding: 0.6rem 0.6rem;
+  border: 1px solid #48c9b0;
+  transition: var(--transition);
+}
+
+.nav-left:hover {
+  color: white;
+  border: 1px solid white;
 }
 
 .nav-right {
@@ -139,7 +147,7 @@ body {
 
 /* links */
 .submenu {
-  background: rgb(233, 230, 230);
+  background: rgb(253, 253, 253);
   box-shadow: var(--dark-shadow);
   position: absolute;
   top: 4rem;
@@ -170,7 +178,8 @@ body {
 }
 
 .submenu-center {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 0.25rem 2rem;
   color: black;
 }
@@ -186,13 +195,18 @@ body {
 .submenu h4 {
   margin-bottom: 1.5rem;
 }
-.submenu-center a {
-  width: 10rem;
-  display: block;
-  color: var(--clr-grey-1);
-  text-transform: capitalize;
-  display: flex;
-  align-items: center;
+.submenu-center button {
+  font-size: 1.2rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(253, 253, 253);
+  margin: 0.5rem 0;
+}
+
+.submenu-center button:hover {
+  color: #48c9b0;
+  background-color: rgb(253, 253, 253);
 }
 .submenu-center svg {
   color: var(--clr-grey-5);
@@ -239,6 +253,7 @@ body {
 
 .grid {
   margin-top: 5rem;
+  border: 3px solid #48c9b0;
 }
 
 #temp {

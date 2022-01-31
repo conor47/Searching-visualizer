@@ -7,6 +7,7 @@ import {
   runAlgorithm,
   cleanGrid,
   clearWalls,
+  resetGrid,
 } from '../Ulilities/gridFunctions';
 
 const Navbar = () => {
@@ -35,7 +36,7 @@ const Navbar = () => {
   const startRunning = () => {
     if (!searchingAlgorithm) {
       setTimeout(() => {
-        algoRef.current.style.color = 'red';
+        algoRef.current.style.color = '#48c9b0';
         setTimeout(() => {
           algoRef.current.style.color = 'white';
         }, 1000);
@@ -86,6 +87,11 @@ const Navbar = () => {
                 speed
               </button>
             </li>
+            <li>
+              <button className="link-btn" onMouseOver={displaySubmenu}>
+                terrain
+              </button>
+            </li>
           </ul>
         </div>
       )}
@@ -94,8 +100,8 @@ const Navbar = () => {
           <button className="btn" onClick={() => startRunning()}>
             Run
           </button>
-          <button className="btn" onClick={() => clearWalls(grid, updateGrid)}>
-            Clear
+          <button className="btn" onClick={() => resetGrid(updateGrid)}>
+            Reset
           </button>
         </div>
       )}

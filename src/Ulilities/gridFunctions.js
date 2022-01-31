@@ -12,6 +12,18 @@ export const generateGrid = () => {
   return grid;
 };
 
+export const resetGrid = (updateGrid) => {
+  const newGrid = generateGrid();
+  for (let i = 0; i < 25; i++) {
+    for (let j = 0; j < 60; j++) {
+      document.getElementById(`${i}-${j}`).classList.remove('visited');
+      document.getElementById(`${i}-${j}`).classList.remove('shortest');
+    }
+  }
+
+  updateGrid(newGrid);
+};
+
 // function for creating a node object
 
 export const createNode = (row, col) => {
@@ -19,7 +31,7 @@ export const createNode = (row, col) => {
     row,
     col,
     distance: Infinity,
-    isEnd: row === 7 && col === 40,
+    isEnd: row === 7 && col === 48,
     isStart: row === 7 && col === 10,
     isVisited: false,
     previousNode: null,

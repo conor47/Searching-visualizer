@@ -9,7 +9,7 @@ const searchingContext = React.createContext();
 const initialState = {
   grid: generateGrid(),
   startNode: [7, 10],
-  endNode: [7, 40],
+  endNode: [7, 48],
   searchingAlgorithm: null,
   speed: 10,
 };

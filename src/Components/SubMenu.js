@@ -46,13 +46,11 @@ const Submenu = () => {
       ref={container}
     >
       <section>
-        <h4>{page}</h4>
         <div className={`submenu-center ${columns}`}>
           {links.map((link, index) => {
-            const { icon, label, menu } = link;
+            const { label, menu } = link;
             return (
               <button key={index} onClick={(e) => handleUpdate(e, menu)}>
-                {icon}
                 {label}
               </button>
             );

@@ -20,6 +20,14 @@ const sublinks = [
       { label: 'slow', icon: <FaBriefcase />, menu: 'speed' },
     ],
   },
+  {
+    page: 'terrain',
+    links: [
+      { label: 'fast', icon: <FaBriefcase />, menu: 'speed' },
+      { label: 'medium', icon: <FaBriefcase />, menu: 'speed' },
+      { label: 'slow', icon: <FaBriefcase />, menu: 'speed' },
+    ],
+  },
 ];
 
 export default sublinks;

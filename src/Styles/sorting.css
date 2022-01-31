@@ -1,5 +1,5 @@
 body {
-  background-color: #02060a;
+  background-color: #020c1b;
   /* max-height: 100vh;
   overflow-y: hidden;
   overflow-x: hidden; */
@@ -48,7 +48,7 @@ body {
   display: inline-block;
   padding: 0.4rem;
   cursor: pointer;
-  background-color: #02060a;
+  background-color: #020c1b;
   border: none;
   color: #64ffda;
   font-size: 1.2rem;
