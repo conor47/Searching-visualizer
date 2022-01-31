@@ -48,8 +48,10 @@ export const runAlgorithm = (
   startNode,
   endNode,
   shortestPath,
-  speed
+  speed,
+  setRunning
 ) => {
+  setRunning(true);
   if (name === 'bidirectionalbfs') {
     const { nodes, middleA, middleB } = algorithm(
       grid,
@@ -61,7 +63,7 @@ export const runAlgorithm = (
       middleA,
       middleB
     );
-    animatePath(nodes, shortestPathNodes, speed);
+    animatePath(nodes, shortestPathNodes, speed, setRunning);
     return;
   } else if (name === 'dfs') {
     const nodes = algorithm(
@@ -69,7 +71,7 @@ export const runAlgorithm = (
       grid[startNode[0]][startNode[1]],
       grid[endNode[0]][endNode[1]]
     );
-    animatePath(nodes, nodes, speed);
+    animatePath(nodes, nodes, speed, setRunning);
     return;
   }
 
@@ -79,21 +81,24 @@ export const runAlgorithm = (
     grid[endNode[0]][endNode[1]]
   );
   const shortestPathNodes = shortestPath(grid[endNode[0]][endNode[1]]);
-  animatePath(nodes, shortestPathNodes.reverse(), speed);
+  animatePath(nodes, shortestPathNodes.reverse(), speed, setRunning);
 };
 
-export const animatePath = (path, shortestPath, speed) => {
+export const animatePath = (path, shortestPath, speed, setRunning) => {
   for (let i = 0; i < path.length; i++) {
     if (path[i].isStart) {
       continue;
     }
     if (i === path.length - 1) {
       setTimeout(() => {
-        animateShortest(shortestPath, speed);
+        animateShortest(shortestPath, speed, setRunning);
       }, i * speed);
     }
     setTimeout(() => {
       let node = path[i];
+      if (node.isEnd) {
+        return;
+      }
       document
         .getElementById(`${node.row}-${node.col}`)
         .classList.add('visited');
@@ -101,9 +106,16 @@ export const animatePath = (path, shortestPath, speed) => {
   }
 };
 
-export const animateShortest = (path, speed) => {
+export const animateShortest = (path, speed, setRunning) => {
   for (let i = 0; i < path.length; i++) {
+    if (path[i].isStart) {
+      continue;
+    }
     setTimeout(() => {
+      if (path[i].isEnd) {
+        setRunning(false);
+        return;
+      }
       let node = path[i];
       document
         .getElementById(`${node.row}-${node.col}`)

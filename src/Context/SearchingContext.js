@@ -12,7 +12,8 @@ const initialState = {
   endNode: [7, 48],
   searchingAlgorithm: null,
   speed: 10,
-  metrics: null,
+  isRunning: false,
+  isSuccessful: false,
 };
 
 export const SearchProvider = ({ children }) => {
@@ -41,9 +42,14 @@ export const SearchProvider = ({ children }) => {
     dispatch({ type: 'SET_SPEED', payload: { speed } });
   };
 
-  const updateMetrics = (time, count) => {
-    dispatch({ type: 'SET_METRICS', payload: { time, count } });
+  const setIsSuccessful = (success) => {
+    dispatch({ type: 'SET_SUCCESS', payload: { success } });
   };
+
+  const setRunning = (running) => {
+    dispatch({ type: 'SET_RUNNING', payload: { running } });
+  };
+
   return (
     <searchingContext.Provider
       value={{
@@ -52,6 +58,8 @@ export const SearchProvider = ({ children }) => {
         setStartNode,
         setSpeed,
         setEndNode,
+        setRunning,
+        setIsSuccessful,
         updateGrid,
       }}
     >

@@ -22,12 +22,12 @@ const sublinks = [
   },
   {
     page: 'terrain',
-    links: [{ label: 'random', icon: <FaBriefcase />, menu: 'speed' }],
+    links: [{ label: 'random', icon: <FaBriefcase />, menu: 'terrain' }],
   },
   {
     page: 'clear',
     links: [
-      { label: 'clear all', icon: <FaBriefcase />, menu: 'controls' },
+      { label: 'clear all', icon: <FaBriefcase />, menu: 'clear' },
       { label: 'clear walls', icon: <FaBriefcase />, menu: 'controls' },
       { label: 'clear path', icon: <FaBriefcase />, menu: 'controls' },
     ],

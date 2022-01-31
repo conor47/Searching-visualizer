@@ -53,6 +53,7 @@ export const astar = (grid, startNode, endNode) => {
       }
     }
   }
+  return nodesInOrder;
 };
 
 const getDistance = (nodeA, nodeB) => {

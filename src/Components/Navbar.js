@@ -7,8 +7,15 @@ import { runAlgorithm, cleanGrid } from '../Ulilities/gridFunctions';
 
 const Navbar = () => {
   const { openSubmenu, closeSubmenu } = useNavbarContext();
-  const { grid, searchingAlgorithm, startNode, endNode, speed } =
-    useSearchingContext();
+  const {
+    grid,
+    searchingAlgorithm,
+    startNode,
+    endNode,
+    speed,
+    setRunning,
+    isRunning,
+  } = useSearchingContext();
   const path = useLocation().pathname;
   const algoRef = useRef(null);
 
@@ -46,7 +53,8 @@ const Navbar = () => {
       startNode,
       endNode,
       shortestPath,
-      speed
+      speed,
+      setRunning
     );
   };
 
@@ -97,7 +105,11 @@ const Navbar = () => {
       )}
       {path === '/' && (
         <div className="nav-right">
-          <button className="btn" onClick={() => startRunning()}>
+          <button
+            disabled={isRunning ? 'disabled' : ''}
+            className="btn"
+            onClick={() => startRunning()}
+          >
             Run
           </button>
         </div>
