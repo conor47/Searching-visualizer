@@ -1,7 +1,11 @@
 import React from 'react';
+import modalInformation from '../Data/modal';
+import { useSearchingContext } from '../Context/SearchingContext';
 import '../Styles/modal.css';
 
-const Modal = ({ setModal }) => {
+const Modal = () => {
+  const { setModal, setModalPage } = useSearchingContext();
+
   return (
     <div className="modal-background">
       <div className="modal-container">
@@ -11,8 +15,8 @@ const Modal = ({ setModal }) => {
           <p>Placeholder 1</p>
         </div>
         <div className="footer"></div>
-        <button onClick={() => setModal(false)}>Cancel</button>
-        <button>Continue</button>
+        <button onClick={() => setModal(false)}>Back</button>
+        <button>Next</button>
       </div>
     </div>
   );

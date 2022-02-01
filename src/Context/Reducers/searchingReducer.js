@@ -19,6 +19,14 @@ const searchingReducer = (state, action) => {
       return { ...state, isSuccessful: action.payload.success };
     case 'SET_MODAL':
       return { ...state, modal: false };
+    case 'SET_MODAL_PAGE':
+      let page = action.payload.page;
+      if (page === 7) {
+        page = 6;
+      } else if (page === 0) {
+        page = 1;
+      }
+      return { ...state, modalPage: page };
     default:
       return { ...state };
   }

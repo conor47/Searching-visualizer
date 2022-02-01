@@ -30,7 +30,6 @@ const PathFinding = () => {
     searchingAlgorithm,
     isSuccessful,
     isRunning,
-    setModal,
     modal,
   } = useSearchingContext();
   const { closeSubmenu } = useNavbarContext();
@@ -68,10 +67,14 @@ const PathFinding = () => {
   };
 
   const handleMouseEnter = (row, col) => {
+    console.log('row', row, 'col', col);
     if (mouseDown && moveStart) {
       moveStartNode(row, col);
       return;
     } else if (mouseDown && moveEnd) {
+      if (grid[row][col].isWall) {
+        return;
+      }
       moveEndNode(row, col);
       if (isRunning || grid[row][col].isWall) {
         return;
@@ -83,7 +86,7 @@ const PathFinding = () => {
           grid,
           searchingAlgorithm.algorithm,
           start,
-          end,
+          [row, col],
           searchingAlgorithm.shortestPath,
           updateGrid
         );
@@ -118,9 +121,7 @@ const PathFinding = () => {
     let updatedOld = { ...oldEnd, isEnd: false };
     newGrid[oldEnd.row][oldEnd.col] = updatedOld;
 
-    let newEnd = grid[row][col];
-    let newUpdatedEnd = { ...newEnd, isEnd: true };
-    newGrid[row][col] = newUpdatedEnd;
+    newGrid[row][col].isEnd = true;
 
     setEndNode([row, col]);
     updateGrid(newGrid);
@@ -130,7 +131,7 @@ const PathFinding = () => {
     <>
       <Navbar />
       <Submenu />
-      {modal && <Modal setModal={setModal} />}
+      {modal && <Modal />}
       <div onMouseOver={closeSubmenu} id="temp" className="wrapper">
         <div className="information-wrapper">
           <div className="information-general">
@@ -148,7 +149,6 @@ const PathFinding = () => {
             {searchingAlgorithm &&
               algoInformation.map((info, idx) => {
                 const { name, text, complexity, url } = info;
-                console.log(name, text);
                 if (name === searchingAlgorithm.name) {
                   return (
                     <div className="information-sub" key={idx}>

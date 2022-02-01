@@ -195,7 +195,6 @@ export const terrainGenerator = (
   genFunction,
   updateGrid
 ) => {
-  console.log('running');
   const start = grid[startNode[0]][startNode[1]];
   const end = grid[endNode[0]][endNode[1]];
 
@@ -242,11 +241,13 @@ export const animateInstantly = (
     grid[endNode[0]][endNode[1]]
   );
   console.log('nodes', nodes);
+  console.log('end', endNode);
   const shortestPathNodes = shortestPath(grid[endNode[0]][endNode[1]]);
-  instantAnimatePath(nodes, shortestPathNodes.reverse(), updateGrid, grid);
+  console.log(shortestPathNodes);
+  instantAnimatePath(nodes, shortestPathNodes.reverse(), grid);
 };
 
-const instantAnimatePath = (path, shortestPath, updateGrid, grid) => {
+const instantAnimatePath = (path, shortestPath, grid) => {
   const newGrid = [];
   const rows = grid.length;
   const cols = grid[0].length;
@@ -264,14 +265,19 @@ const instantAnimatePath = (path, shortestPath, updateGrid, grid) => {
     }
     newGrid.push(row);
   }
-  console.log('path', shortestPath);
   for (let node of path) {
+    if (node.isStart || node.isEnd) {
+      continue;
+    }
     const { row, col } = node;
     document.getElementById(`${row}-${col}`).classList.add('visited');
     newGrid[row][col].isVisited = true;
   }
 
   for (let node of shortestPath) {
+    if (node.isStart || node.isEnd) {
+      continue;
+    }
     const { row, col } = node;
     document.getElementById(`${row}-${col}`).classList.add('shortest');
   }

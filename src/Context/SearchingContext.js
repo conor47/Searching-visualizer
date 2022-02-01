@@ -16,6 +16,7 @@ const initialState = {
   isRunning: false,
   isSuccessful: true,
   modal: true,
+  modalPage: 1,
 };
 
 export const SearchProvider = ({ children }) => {
@@ -56,6 +57,10 @@ export const SearchProvider = ({ children }) => {
     dispatch({ type: 'SET_MODAL' });
   };
 
+  const setModalPage = (page) => {
+    dispatch({ type: 'SET_MODAL_PAGE', payload: { page } });
+  };
+
   return (
     <searchingContext.Provider
       value={{
@@ -68,6 +73,7 @@ export const SearchProvider = ({ children }) => {
         setIsSuccessful,
         updateGrid,
         setModal,
+        setModalPage,
       }}
     >
       {children}

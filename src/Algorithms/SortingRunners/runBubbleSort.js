@@ -20,7 +20,6 @@ const runBubbleSort = (array, arrayBars, sortingSpeed, setRunning) => {
     } else {
       setTimeout(() => {
         if (i === animations.length - 1) {
-          console.log('here');
           setRunning(false);
           successPass(arrayBars, sortingSpeed);
         }
