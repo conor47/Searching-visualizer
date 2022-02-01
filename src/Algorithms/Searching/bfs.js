@@ -1,5 +1,4 @@
 export const bfs = (grid, startNode, endNode) => {
-  console.log('bfs', grid, startNode, endNode);
   const nodesInOrder = [];
   const queue = [];
   queue.push(startNode);

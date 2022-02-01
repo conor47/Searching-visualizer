@@ -22,9 +22,7 @@ const sublinks = [
   },
   {
     page: 'terrain',
-    links: [
-      { label: 'random', icon: <FaBriefcase />, menu: '<terrain></terrain>' },
-    ],
+    links: [{ label: 'random', icon: <FaBriefcase />, menu: 'terrain' }],
   },
   {
     page: 'clear',

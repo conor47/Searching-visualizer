@@ -15,7 +15,7 @@ const runBubbleSort = (array, arrayBars, sortingSpeed, setRunning) => {
     } else {
       setTimeout(() => {
         let temp = bar1.style.height;
-        console.log(temp);
+
         bar1.style.height = bar2.style.height;
         bar2.style.height = temp;
         bar1.style.backgroundColor = color;

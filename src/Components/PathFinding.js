@@ -26,6 +26,7 @@ const PathFinding = () => {
     endNode: end,
     searchingAlgorithm,
     isSuccessful,
+    isRunning,
   } = useSearchingContext();
   const { closeSubmenu } = useNavbarContext();
 
@@ -67,6 +68,9 @@ const PathFinding = () => {
       return;
     } else if (mouseDown && moveEnd) {
       moveEndNode(row, col);
+      if (isRunning || grid[row][col].isWall) {
+        return;
+      }
       if (isSuccessful) {
         cleanGrid(grid, updateGrid);
         animateInstantly(
@@ -135,13 +139,14 @@ const PathFinding = () => {
           {searchingAlgorithm &&
             algoInformation.map((info, idx) => {
               const { name, text, complexity, url } = info;
+              console.log(name, text);
               if (name === searchingAlgorithm.name) {
                 return (
-                  <div className="information-sub">
-                    <p>{text}</p>
-                    <p>{complexity}</p>
-                    <p>
-                      See more{' '}
+                  <div className="information-sub" key={idx}>
+                    <p className="information-span">{text}</p>
+                    <p className="information-span">{complexity}</p>
+                    <p className="information-span">
+                      Learn more{' '}
                       <a
                         className="information-link"
                         href={url}

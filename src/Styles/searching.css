@@ -90,6 +90,25 @@ body {
 
 .nav-right {
   margin-right: 2rem;
+  color: #48c9b0;
+  font-size: 1.1rem;
+  /* padding: 0.6rem 0.6rem; */
+  border: 1px solid #48c9b0;
+  transition: var(--transition);
+}
+
+.nav-right:hover {
+  color: white;
+  border: 1px solid white;
+}
+
+.nav-right button {
+  padding: 0.6rem 0.8rem;
+  color: #48c9b0;
+}
+
+.nav-right button:hover {
+  color: white;
 }
 
 .nav-links {
@@ -247,6 +266,11 @@ body {
   font-size: 1.1rem;
   padding: 0.8rem 0;
   max-width: 100%;
+}
+
+.information-span {
+  margin: 0;
+  padding: 0.8rem;
 }
 
 .information-link {

@@ -1,5 +1,4 @@
 const searchingReducer = (state, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case 'SET_SEARCH':
       return {

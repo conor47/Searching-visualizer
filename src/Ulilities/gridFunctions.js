@@ -195,6 +195,7 @@ export const terrainGenerator = (
   genFunction,
   updateGrid
 ) => {
+  console.log('running');
   const start = grid[startNode[0]][startNode[1]];
   const end = grid[endNode[0]][endNode[1]];
 
