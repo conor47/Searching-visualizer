@@ -1,4 +1,5 @@
 import selectionSort from '../Sorting/selectionSort';
+import { successPass } from '../../Ulilities/arrayFunctions';
 
 const runSelectionSort = (array, arrayBars, sortingSpeed, setRunning) => {
   const animations = selectionSort(array)[0];
@@ -9,6 +10,10 @@ const runSelectionSort = (array, arrayBars, sortingSpeed, setRunning) => {
     let bar2 = arrayBars[indices[1]];
     if (!swap) {
       setTimeout(() => {
+        if (i === animations.length - 1) {
+          setRunning(false);
+          successPass(arrayBars, sortingSpeed);
+        }
         bar1.style.backgroundColor = color;
         bar2.style.backgroundColor = color;
         // let temp = bar1.style.height;
@@ -17,6 +22,10 @@ const runSelectionSort = (array, arrayBars, sortingSpeed, setRunning) => {
       }, i * sortingSpeed);
     } else {
       setTimeout(() => {
+        if (i === animations.length - 1) {
+          setRunning(false);
+          successPass(arrayBars, sortingSpeed);
+        }
         bar1.style.backgroundColor = color;
         bar2.style.backgroundColor = color;
         let temp = bar1.style.height;
@@ -25,9 +34,6 @@ const runSelectionSort = (array, arrayBars, sortingSpeed, setRunning) => {
       }, i * sortingSpeed);
     }
   }
-  setTimeout(() => {
-    setRunning(false);
-  }, animations.length * sortingSpeed);
 };
 
 export default runSelectionSort;

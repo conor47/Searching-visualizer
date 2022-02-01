@@ -11,11 +11,11 @@ function partition(arr, low, high, animations) {
       arr[i] = arr[j];
       arr[j] = temp;
       animations.push({ indices: [i, j], color: 'red', swap: false });
-      animations.push({ indices: [i, j], color: '#64ffda', swap: true });
+      animations.push({ indices: [i, j], color: 'white', swap: true });
     }
   }
 
-  animations.push({ indices: [i + 1, high], color: '#64ffda', swap: true });
+  animations.push({ indices: [i + 1, high], color: 'white', swap: true });
   temp = arr[i + 1];
   arr[i + 1] = arr[high];
   arr[high] = temp;

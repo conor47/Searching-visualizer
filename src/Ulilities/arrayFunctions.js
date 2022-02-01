@@ -9,3 +9,18 @@ export const generateArray = (size) => {
   }
   return arr;
 };
+
+export const successPass = (array, speed) => {
+  console.log('success');
+  for (let i = 0; i < array.length; i++) {
+    setTimeout(() => {
+      array[i].style.backgroundColor = '#48c9b0';
+    }, i * 10);
+  }
+};
+
+export const resetColor = (array) => {
+  for (let bar of array) {
+    bar.style.backgroundColor = 'white';
+  }
+};

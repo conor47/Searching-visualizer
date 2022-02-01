@@ -10,12 +10,16 @@ import {
 } from '../Ulilities/gridFunctions';
 import information from '../Data/information';
 import algoInformation from '../Data/algorithmInformatoin';
+import Modal from '../Components/Modal';
+import Navbar from './Navbar';
+import Submenu from './SubMenu';
 
 const PathFinding = () => {
   const [moveEnd, setMoveEnd] = useState(false);
   const [moveStart, setMoveStart] = useState(false);
   const [mouseDown, setMouseDown] = useState(false);
   const [addWall, setAddWall] = useState(false);
+  const [modal, setModal] = useState(true);
 
   const {
     grid,
@@ -122,82 +126,87 @@ const PathFinding = () => {
   };
 
   return (
-    <div onMouseOver={closeSubmenu} id="temp" className="wrapper">
-      <div className="information-wrapper">
-        <div className="information-general">
-          {information.map((info, idx) => {
-            const { text, icon } = info;
-            return (
-              <div key={idx} className="information-sub">
-                {icon}
-                <span>{text}</span>
-              </div>
-            );
-          })}
+    <>
+      <Navbar />
+      <Submenu />
+      {modal && <Modal setModa={setModal} />}
+      <div onMouseOver={closeSubmenu} id="temp" className="wrapper">
+        <div className="information-wrapper">
+          <div className="information-general">
+            {information.map((info, idx) => {
+              const { text, icon } = info;
+              return (
+                <div key={idx} className="information-sub">
+                  {icon}
+                  <span>{text}</span>
+                </div>
+              );
+            })}
+          </div>
+          <div className="information-algo">
+            {searchingAlgorithm &&
+              algoInformation.map((info, idx) => {
+                const { name, text, complexity, url } = info;
+                console.log(name, text);
+                if (name === searchingAlgorithm.name) {
+                  return (
+                    <div className="information-sub" key={idx}>
+                      <p className="information-span">{text}</p>
+                      <p className="information-span">{complexity}</p>
+                      <p className="information-span">
+                        Learn more{' '}
+                        <a
+                          className="information-link"
+                          href={url}
+                          target="_blank"
+                        >
+                          here
+                        </a>
+                      </p>
+                    </div>
+                  );
+                }
+              })}
+          </div>
         </div>
-        <div className="information-algo">
-          {searchingAlgorithm &&
-            algoInformation.map((info, idx) => {
-              const { name, text, complexity, url } = info;
-              console.log(name, text);
-              if (name === searchingAlgorithm.name) {
-                return (
-                  <div className="information-sub" key={idx}>
-                    <p className="information-span">{text}</p>
-                    <p className="information-span">{complexity}</p>
-                    <p className="information-span">
-                      Learn more{' '}
-                      <a
-                        className="information-link"
-                        href={url}
-                        target="_blank"
-                      >
-                        here
-                      </a>
-                    </p>
-                  </div>
-                );
-              }
+
+        <div className="grid">
+          {grid &&
+            grid.map((row, i) => {
+              return (
+                <div className="row" key={i}>
+                  {row.map((node, j) => {
+                    const {
+                      row,
+                      col,
+                      isWall,
+                      isEnd,
+                      isStart,
+                      isVisited,
+                      previousNode,
+                    } = grid[i][j];
+                    return (
+                      <Node
+                        key={j}
+                        row={row}
+                        col={col}
+                        isStart={isStart}
+                        isEnd={isEnd}
+                        isVisited={isVisited}
+                        prevousNode={previousNode}
+                        handleMouseEnter={handleMouseEnter}
+                        handleMouseDown={handleMouseDown}
+                        handleMouseUp={handleMouseUp}
+                        isWall={isWall}
+                      />
+                    );
+                  })}
+                </div>
+              );
             })}
         </div>
       </div>
-
-      <div className="grid">
-        {grid &&
-          grid.map((row, i) => {
-            return (
-              <div className="row" key={i}>
-                {row.map((node, j) => {
-                  const {
-                    row,
-                    col,
-                    isWall,
-                    isEnd,
-                    isStart,
-                    isVisited,
-                    previousNode,
-                  } = grid[i][j];
-                  return (
-                    <Node
-                      key={j}
-                      row={row}
-                      col={col}
-                      isStart={isStart}
-                      isEnd={isEnd}
-                      isVisited={isVisited}
-                      prevousNode={previousNode}
-                      handleMouseEnter={handleMouseEnter}
-                      handleMouseDown={handleMouseDown}
-                      handleMouseUp={handleMouseUp}
-                      isWall={isWall}
-                    />
-                  );
-                })}
-              </div>
-            );
-          })}
-      </div>
-    </div>
+    </>
   );
 };
 

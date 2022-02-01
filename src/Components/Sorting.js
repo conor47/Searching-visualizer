@@ -6,6 +6,9 @@ import runSelectionSort from '../Algorithms/SortingRunners/runSelectionSort';
 import runInsertionSort from '../Algorithms/SortingRunners/runInsertionSort';
 import runMergeSort from '../Algorithms/SortingRunners/runMergeSort';
 import { useNavbarContext } from '../Context/NavbarContext';
+import { resetColor } from '../Ulilities/arrayFunctions';
+import Navbar from './Navbar';
+import Submenu from './SubMenu';
 
 const SortingVisualizer = () => {
   const { array, newArray, running, setRunning } = useSortingContext();
@@ -24,6 +27,7 @@ const SortingVisualizer = () => {
   useEffect(() => {
     newArray(arraySize);
     setArrayBars(document.getElementsByClassName('array-bar'));
+    resetColor(arrayBars);
     // eslint-disable-next-line
   }, [arraySize]);
 
@@ -35,6 +39,11 @@ const SortingVisualizer = () => {
     setBarWidth(`${width}px`);
     // eslint-disable-next-line
   }, [arraySize]);
+
+  const createNewArray = () => {
+    newArray(arraySize);
+    resetColor(arrayBars);
+  };
 
   const changeArraySize = (e) => {
     setSizeSlider(e.target.value);
@@ -48,6 +57,8 @@ const SortingVisualizer = () => {
 
   return (
     <>
+      <Navbar />
+      <Submenu />
       <div className="center" onMouseEnter={() => closeSubmenu()}>
         <div className="array-container" ref={containerRef}>
           {array.map((val, idx) => {
@@ -92,7 +103,7 @@ const SortingVisualizer = () => {
           <button
             className="new-array-button"
             // disabled={running}
-            onClick={() => newArray(arraySize)}
+            onClick={() => createNewArray(arraySize)}
             disabled={running ? 'disabled' : null}
           >
             Generate New Array

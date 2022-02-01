@@ -8,10 +8,10 @@ const bubbleSort = function (arr) {
       animations.push({ indices: [j, j + 1], color: 'red', swap: false });
       if (temp[j] > temp[j + 1]) {
         noSwaps = false;
-        animations.push({ indices: [j, j + 1], color: '#64ffda', swap: true });
+        animations.push({ indices: [j, j + 1], color: 'white', swap: true });
         [temp[j], temp[j + 1]] = [temp[j + 1], temp[j]];
       }
-      animations.push({ indices: [j, j + 1], color: '#64ffda', swap: false });
+      animations.push({ indices: [j, j + 1], color: 'white', swap: false });
     }
     if (noSwaps) {
       break;
