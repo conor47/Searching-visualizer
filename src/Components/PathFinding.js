@@ -19,7 +19,6 @@ const PathFinding = () => {
   const [moveStart, setMoveStart] = useState(false);
   const [mouseDown, setMouseDown] = useState(false);
   const [addWall, setAddWall] = useState(false);
-  const [modal, setModal] = useState(true);
 
   const {
     grid,
@@ -31,6 +30,8 @@ const PathFinding = () => {
     searchingAlgorithm,
     isSuccessful,
     isRunning,
+    setModal,
+    modal,
   } = useSearchingContext();
   const { closeSubmenu } = useNavbarContext();
 
@@ -129,7 +130,7 @@ const PathFinding = () => {
     <>
       <Navbar />
       <Submenu />
-      {modal && <Modal setModa={setModal} />}
+      {modal && <Modal setModal={setModal} />}
       <div onMouseOver={closeSubmenu} id="temp" className="wrapper">
         <div className="information-wrapper">
           <div className="information-general">

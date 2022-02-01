@@ -15,6 +15,7 @@ const initialState = {
   speed: 10,
   isRunning: false,
   isSuccessful: true,
+  modal: true,
 };
 
 export const SearchProvider = ({ children }) => {
@@ -51,6 +52,10 @@ export const SearchProvider = ({ children }) => {
     dispatch({ type: 'SET_RUNNING', payload: { running } });
   };
 
+  const setModal = () => {
+    dispatch({ type: 'SET_MODAL' });
+  };
+
   return (
     <searchingContext.Provider
       value={{
@@ -62,6 +67,7 @@ export const SearchProvider = ({ children }) => {
         setRunning,
         setIsSuccessful,
         updateGrid,
+        setModal,
       }}
     >
       {children}

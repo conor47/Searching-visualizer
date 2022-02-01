@@ -17,6 +17,8 @@ const searchingReducer = (state, action) => {
       return { ...state, isRunning: action.payload.running };
     case 'SET_SUCCESS':
       return { ...state, isSuccessful: action.payload.success };
+    case 'SET_MODAL':
+      return { ...state, modal: false };
     default:
       return { ...state };
   }
