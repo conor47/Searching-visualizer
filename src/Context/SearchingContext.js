@@ -11,19 +11,20 @@ const initialState = {
   startNode: [7, 10],
   endNode: [7, 48],
   searchingAlgorithm: null,
+  shortestPathAlgorithm: null,
   speed: 10,
   isRunning: false,
-  isSuccessful: false,
+  isSuccessful: true,
 };
 
 export const SearchProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const setSearchingAlgorithm = (text) => {
-    const algorithm = algorithms.find(
+    const algo = algorithms.find(
       (algo) => algo.name === `${text.toLowerCase()}`
     );
-    dispatch({ type: 'SET_SEARCH', payload: { algorithm } });
+    dispatch({ type: 'SET_SEARCH', payload: algo });
   };
 
   const setStartNode = (node) => {

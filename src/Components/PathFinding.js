@@ -3,7 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Node from './Node';
 import { useNavbarContext } from '../Context/NavbarContext';
 import { useSearchingContext } from '../Context/SearchingContext';
-import { updateWall } from '../Ulilities/gridFunctions';
+import {
+  updateWall,
+  animateInstantly,
+  cleanGrid,
+} from '../Ulilities/gridFunctions';
 import information from '../Data/information';
 import algoInformation from '../Data/algorithmInformatoin';
 
@@ -21,6 +25,7 @@ const PathFinding = () => {
     startNode: start,
     endNode: end,
     searchingAlgorithm,
+    isSuccessful,
   } = useSearchingContext();
   const { closeSubmenu } = useNavbarContext();
 
@@ -62,6 +67,18 @@ const PathFinding = () => {
       return;
     } else if (mouseDown && moveEnd) {
       moveEndNode(row, col);
+      if (isSuccessful) {
+        cleanGrid(grid, updateGrid);
+        animateInstantly(
+          searchingAlgorithm.name,
+          grid,
+          searchingAlgorithm.algorithm,
+          start,
+          end,
+          searchingAlgorithm.shortestPath,
+          updateGrid
+        );
+      }
       return;
     }
 

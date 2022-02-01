@@ -148,15 +148,20 @@ export const updateWall = (row, col, start, end, grid, updateGrid, addWall) => {
   updateGrid(newGrid);
 };
 
-export const cleanGrid = (grid) => {
+export const cleanGrid = (grid, updateGrid) => {
+  let newGrid = [];
   for (let i = 0; i < grid.length; i++) {
+    let row = [];
     for (let j = 0; j < grid[0].length; j++) {
       document.getElementById(`${i}-${j}`).classList.remove('visited');
-      document
-        .getElementById(`${i}-${j}`)
-        .classList.remove('<shortest></shortest>');
+      document.getElementById(`${i}-${j}`).classList.remove('shortest');
+      let oldNode = grid[i][j];
+      let newNode = { ...oldNode, isVisited: false };
+      row.push(newNode);
     }
+    newGrid.push(row);
   }
+  updateGrid(newGrid);
 };
 
 export const clearWalls = (grid, updateGrid) => {
@@ -195,4 +200,79 @@ export const terrainGenerator = (
 
   const newGrid = genFunction(grid, start, end);
   updateGrid(newGrid);
+};
+
+export const animateInstantly = (
+  name,
+  grid,
+  algorithm,
+  startNode,
+  endNode,
+  shortestPath,
+  updateGrid
+) => {
+  // cleanGrid(grid, updateGrid);
+  if (name === 'bidirectionalbfs') {
+    const { nodes, middleA, middleB } = algorithm(
+      grid,
+      grid[startNode[0]][startNode[1]],
+      grid[endNode[0]][endNode[1]]
+    );
+    let shortestPathNodes = shortestPath(
+      grid[endNode[0]][endNode[1]],
+      middleA,
+      middleB
+    );
+    instantAnimatePath(nodes, shortestPathNodes, updateGrid, grid);
+    return;
+  } else if (name === 'dfs') {
+    const nodes = algorithm(
+      grid,
+      grid[startNode[0]][startNode[1]],
+      grid[endNode[0]][endNode[1]]
+    );
+    instantAnimatePath(nodes, nodes, updateGrid, grid);
+    return;
+  }
+
+  const nodes = algorithm(
+    grid,
+    grid[startNode[0]][startNode[1]],
+    grid[endNode[0]][endNode[1]]
+  );
+  console.log('nodes', nodes);
+  const shortestPathNodes = shortestPath(grid[endNode[0]][endNode[1]]);
+  instantAnimatePath(nodes, shortestPathNodes.reverse(), updateGrid, grid);
+};
+
+const instantAnimatePath = (path, shortestPath, updateGrid, grid) => {
+  const newGrid = [];
+  const rows = grid.length;
+  const cols = grid[0].length;
+  for (let i = 0; i < rows; i++) {
+    let row = [];
+    for (let j = 0; j < cols; j++) {
+      let oldNode = grid[i][j];
+      let newNode = { ...oldNode };
+      if (newNode.isEnd || newNode.isStart) {
+        row.push(newNode);
+        continue;
+      }
+      newNode.isVisited = false;
+      row.push(newNode);
+    }
+    newGrid.push(row);
+  }
+  console.log('path', shortestPath);
+  for (let node of path) {
+    const { row, col } = node;
+    document.getElementById(`${row}-${col}`).classList.add('visited');
+    newGrid[row][col].isVisited = true;
+  }
+
+  for (let node of shortestPath) {
+    const { row, col } = node;
+    document.getElementById(`${row}-${col}`).classList.add('shortest');
+  }
+  // updateGrid(newGrid);
 };

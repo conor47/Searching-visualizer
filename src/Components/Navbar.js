@@ -45,7 +45,6 @@ const Navbar = () => {
       }, 1);
     }
     const { algorithm, shortestPath, name } = searchingAlgorithm;
-    cleanGrid(grid);
     runAlgorithm(
       name,
       grid,

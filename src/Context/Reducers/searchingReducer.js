@@ -1,7 +1,11 @@
 const searchingReducer = (state, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case 'SET_SEARCH':
-      return { ...state, searchingAlgorithm: action.payload.algorithm };
+      return {
+        ...state,
+        searchingAlgorithm: action.payload,
+      };
     case 'UPDATE_GRID':
       return { ...state, grid: action.payload.newGrid };
     case 'SET_START':
