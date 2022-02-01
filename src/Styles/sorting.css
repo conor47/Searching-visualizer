@@ -1,8 +1,5 @@
 body {
   background-color: #020c1b;
-  /* max-height: 100vh;
-  overflow-y: hidden;
-  overflow-x: hidden; */
 }
 
 .center {
@@ -10,13 +7,17 @@ body {
   text-align: center;
   margin-top: 4rem;
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  flex-direction: column;
 }
 
 .array-container {
   display: block;
-  margin: auto;
-  margin-top: 1rem;
   max-width: 90vw;
+  margin-bottom: 2rem;
 }
 
 .array-bar {
@@ -31,7 +32,6 @@ body {
 
 .controls {
   width: 100vw;
-  left: 0px;
   display: flex;
   margin-bottom: 2rem;
   align-items: center;

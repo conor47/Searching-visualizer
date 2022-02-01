@@ -71,88 +71,88 @@ const SortingVisualizer = () => {
             );
           })}
         </div>
-      </div>
-      <div className="controls">
-        <div className="slider-container">
-          <div className="input">
-            <label htmlFor="sortingSpeed">Speed</label>
-            <input
-              type="range"
-              id="sortingSpeed"
-              min={-20}
-              max={-1}
-              value={speedSlider}
-              className="slider"
-              onChange={(e) => changeSortingSpeed(e)}
-            />
+        <div className="controls">
+          <div className="slider-container">
+            <div className="input">
+              <label htmlFor="sortingSpeed">Speed</label>
+              <input
+                type="range"
+                id="sortingSpeed"
+                min={-20}
+                max={-1}
+                value={speedSlider}
+                className="slider"
+                onChange={(e) => changeSortingSpeed(e)}
+              />
+            </div>
+            <div className="input">
+              <label htmlFor="arraySize">Size</label>
+              <input
+                type="range"
+                id="arraySize"
+                min={80}
+                max={230}
+                value={sizeSlider}
+                className="slider"
+                onChange={(e) => changeArraySize(e)}
+              />
+            </div>
           </div>
-          <div className="input">
-            <label htmlFor="arraySize">Size</label>
-            <input
-              type="range"
-              id="arraySize"
-              min={80}
-              max={230}
-              value={sizeSlider}
-              className="slider"
-              onChange={(e) => changeArraySize(e)}
-            />
+          <div className="buttons">
+            <button
+              className="new-array-button"
+              // disabled={running}
+              onClick={() => createNewArray(arraySize)}
+              disabled={running ? 'disabled' : null}
+            >
+              Generate New Array
+            </button>
+            <button
+              className="new-array-button"
+              onClick={() =>
+                runMergeSort(array, arrayBars, -sortingSpeed, setRunning)
+              }
+              disabled={running ? 'disabled' : ''}
+            >
+              Merge Sort
+            </button>
+            <button
+              className="new-array-button"
+              onClick={() =>
+                runBubbleSort(array, arrayBars, -sortingSpeed, setRunning)
+              }
+              disabled={running ? 'disabled' : null}
+            >
+              Bubble Sort
+            </button>
+            <button
+              className="new-array-button"
+              onClick={() =>
+                runInsertionSort(array, arrayBars, -sortingSpeed, setRunning)
+              }
+              disabled={running ? 'disabled' : null}
+            >
+              Insertion Sort
+            </button>
+            <button
+              className="new-array-button"
+              onClick={() =>
+                runSelectionSort(array, arrayBars, -sortingSpeed, setRunning)
+              }
+              disabled={running ? 'disabled' : null}
+            >
+              Selection Sort
+            </button>
+            <button
+              className="new-array-button"
+              onClick={() =>
+                runQuickSort(array, arrayBars, -sortingSpeed, setRunning)
+              }
+              disabled={running ? 'disabled' : null}
+            >
+              Quick Sort
+            </button>
           </div>
-        </div>
-        <div className="buttons">
-          <button
-            className="new-array-button"
-            // disabled={running}
-            onClick={() => createNewArray(arraySize)}
-            disabled={running ? 'disabled' : null}
-          >
-            Generate New Array
-          </button>
-          <button
-            className="new-array-button"
-            onClick={() =>
-              runMergeSort(array, arrayBars, -sortingSpeed, setRunning)
-            }
-            disabled={running ? 'disabled' : ''}
-          >
-            Merge Sort
-          </button>
-          <button
-            className="new-array-button"
-            onClick={() =>
-              runBubbleSort(array, arrayBars, -sortingSpeed, setRunning)
-            }
-            disabled={running ? 'disabled' : null}
-          >
-            Bubble Sort
-          </button>
-          <button
-            className="new-array-button"
-            onClick={() =>
-              runInsertionSort(array, arrayBars, -sortingSpeed, setRunning)
-            }
-            disabled={running ? 'disabled' : null}
-          >
-            Insertion Sort
-          </button>
-          <button
-            className="new-array-button"
-            onClick={() =>
-              runSelectionSort(array, arrayBars, -sortingSpeed, setRunning)
-            }
-            disabled={running ? 'disabled' : null}
-          >
-            Selection Sort
-          </button>
-          <button
-            className="new-array-button"
-            onClick={() =>
-              runQuickSort(array, arrayBars, -sortingSpeed, setRunning)
-            }
-            disabled={running ? 'disabled' : null}
-          >
-            Quick Sort
-          </button>
         </div>
       </div>
     </>

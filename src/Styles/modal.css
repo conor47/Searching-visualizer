@@ -13,10 +13,82 @@
 
 .modal-container {
   width: 60vw;
-  height: 70vh;
+  position: relative;
   border-radius: 12px;
   background-color: white;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+}
+
+.exit-button {
+  cursor: pointer;
+  transition: all ease-in-out 0.3s;
+}
+
+.exit-icon {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  font-size: 2rem;
+  color: #48c9b0;
+  border-radius: 50%;
+  background-color: white;
+  transition: all ease-in-out 0.3s;
+}
+
+.exit-icon:hover {
+  color: red;
+}
+
+.title {
+  margin-bottom: 2rem;
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+.modal-gif {
+  border: none;
+  margin-bottom: 1rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  /* position: absolute ; */
+  bottom: 0px;
+  margin-bottom: 2rem;
+}
+
+.modal-footer button {
+  margin: 0 2rem;
+  padding: 1.2rem;
+  color: white;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.modal-footer button:hover {
+  opacity: 0.7;
+}
+
+.next-button {
+  background-color: #48c9b0;
+}
+
+.back-button {
+  background-color: #48c9b0;
+}
+
+.modal-page {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
 }
