@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSortingContext } from '../Context/SortingContext';
 import runBubbleSort from '../Algorithms/SortingRunners/runBubbleSort';
 import runQuickSort from '../Algorithms/SortingRunners/runQuickSort';
-import runSelectionSort from '../Algorithms/SortingRunners/runSelectionSort';
 import runInsertionSort from '../Algorithms/SortingRunners/runInsertionSort';
 import runMergeSort from '../Algorithms/SortingRunners/runMergeSort';
 import runHeapSort from '../Algorithms/SortingRunners/runHeapSort';
@@ -12,7 +11,7 @@ import Navbar from './Navbar';
 import Submenu from './SubMenu';
 
 const SortingVisualizer = () => {
-  const { array, newArray, running, setRunning, success } = useSortingContext();
+  const { array, newArray, running, setRunning } = useSortingContext();
   const [speedSlider, setSpeedSlider] = useState(-10);
   const [sizeSlider, setSizeSlider] = useState(155);
   const [arraySize, setArraySize] = useState(155);
@@ -134,15 +133,6 @@ const SortingVisualizer = () => {
               disabled={running ? 'disabled' : null}
             >
               Insertion Sort
-            </button>
-            <button
-              className="new-array-button"
-              onClick={() =>
-                runSelectionSort(array, arrayBars, -sortingSpeed, setRunning)
-              }
-              disabled={running ? 'disabled' : null}
-            >
-              Selection Sort
             </button>
             <button
               className="new-array-button"

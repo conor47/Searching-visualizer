@@ -26,7 +26,7 @@ export const recursiveDivisionMaze = (
           row === board.length - 1 ||
           col === board[0].length - 1
         ) {
-          let htmlNode = document.getElementById(`${row}-${col}`);
+          // let htmlNode = document.getElementById(`${row}-${col}`);
           wallsToAnimate.push(node);
           if (type === 'wall') {
             node.isWall = true;
@@ -59,7 +59,7 @@ export const recursiveDivisionMaze = (
         col >= colStart - 1 &&
         col <= colEnd + 1
       ) {
-        let htmlNode = document.getElementById(`${row}-${col}`);
+        // let htmlNode = document.getElementById(`${row}-${col}`);
         if (!node.isStart && !node.isEnd) {
           wallsToAnimate.push(node);
           if (type === 'wall') {
@@ -148,7 +148,7 @@ export const recursiveDivisionMaze = (
         row >= rowStart - 1 &&
         row <= rowEnd + 1
       ) {
-        let htmlNode = Document.getElementById(`${row}-${col}`);
+        // let htmlNode = Document.getElementById(`${row}-${col}`);
         if (!node.isStart && !node.isEnd) {
           wallsToAnimate.push(node);
           if (type === 'wall') {

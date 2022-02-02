@@ -175,12 +175,15 @@ const PathFinding = () => {
                           className="information-link"
                           href={url}
                           target="_blank"
+                          rel="noreferrer"
                         >
                           here
                         </a>
                       </p>
                     </div>
                   );
+                } else {
+                  return null;
                 }
               })}
           </div>

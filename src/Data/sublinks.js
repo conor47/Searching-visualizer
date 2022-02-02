@@ -1,38 +1,36 @@
-import { FaCreditCard, FaBook, FaBriefcase } from 'react-icons/fa';
-import React from 'react';
 const sublinks = [
   {
     page: 'algorithms',
     links: [
-      { label: 'BFS', icon: <FaCreditCard />, menu: 'algos' },
-      { label: 'DFS', icon: <FaCreditCard />, menu: 'algos' },
-      { label: 'Dijkstra', icon: <FaCreditCard />, menu: 'algos' },
-      { label: 'AStar', icon: <FaCreditCard />, menu: 'algos' },
-      { label: 'BidirectionalBFS', icon: <FaCreditCard />, menu: 'algos' },
+      { label: 'BFS', menu: 'algos' },
+      { label: 'DFS', menu: 'algos' },
+      { label: 'Dijkstra', menu: 'algos' },
+      { label: 'AStar', menu: 'algos' },
+      { label: 'BidirectionalBFS', menu: 'algos' },
     ],
   },
 
   {
     page: 'speed',
     links: [
-      { label: 'fast', icon: <FaBriefcase />, menu: 'speed' },
-      { label: 'medium', icon: <FaBriefcase />, menu: 'speed' },
-      { label: 'slow', icon: <FaBriefcase />, menu: 'speed' },
+      { label: 'fast', menu: 'speed' },
+      { label: 'medium', menu: 'speed' },
+      { label: 'slow', menu: 'speed' },
     ],
   },
   {
     page: 'terrain',
     links: [
-      { label: 'random', icon: <FaBriefcase />, menu: 'terrain' },
-      { label: 'recursive', icon: <FaBriefcase />, menu: 'terrain' },
+      { label: 'random', menu: 'terrain' },
+      { label: 'recursive', menu: 'terrain' },
     ],
   },
   {
     page: 'clear',
     links: [
-      { label: 'clear all', icon: <FaBriefcase />, menu: 'controls' },
-      { label: 'clear walls', icon: <FaBriefcase />, menu: 'controls' },
-      { label: 'clear path', icon: <FaBriefcase />, menu: 'controls' },
+      { label: 'clear all', menu: 'controls' },
+      { label: 'clear walls', menu: 'controls' },
+      { label: 'clear path', menu: 'controls' },
     ],
   },
 ];

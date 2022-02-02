@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { useNavbarContext } from '../Context/NavbarContext';
 import { useSearchingContext } from '../Context/SearchingContext';
-import { runAlgorithm, cleanGrid } from '../Ulilities/gridFunctions';
+import { runAlgorithm } from '../Ulilities/gridFunctions';
 
 const Navbar = () => {
   const { openSubmenu, closeSubmenu } = useNavbarContext();
