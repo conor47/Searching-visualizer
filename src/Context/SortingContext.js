@@ -26,7 +26,9 @@ export const SortingProvider = ({ children }) => {
   };
 
   return (
-    <sortingContext.Provider value={{ ...state, setRunning, newArray }}>
+    <sortingContext.Provider
+      value={{ ...state, setRunning, newArray, setSuccess }}
+    >
       {children}
     </sortingContext.Provider>
   );
