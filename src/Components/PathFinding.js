@@ -67,9 +67,21 @@ const PathFinding = () => {
   };
 
   const handleMouseEnter = (row, col) => {
-    console.log('row', row, 'col', col);
-    if (mouseDown && moveStart) {
+    if (mouseDown && moveStart && isSuccessful) {
+      if (grid[row][col].isWall) {
+        return;
+      }
       moveStartNode(row, col);
+      cleanGrid(grid, updateGrid);
+      animateInstantly(
+        searchingAlgorithm.name,
+        grid,
+        searchingAlgorithm.algorithm,
+        start,
+        end,
+        searchingAlgorithm.shortestPath,
+        updateGrid
+      );
       return;
     } else if (mouseDown && moveEnd) {
       if (grid[row][col].isWall) {

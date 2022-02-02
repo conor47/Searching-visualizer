@@ -170,7 +170,6 @@ body {
 /* links */
 .submenu {
   background: rgb(253, 253, 253);
-  box-shadow: var(--dark-shadow);
   position: absolute;
   top: 4rem;
   left: 50%;
@@ -179,7 +178,7 @@ body {
   display: none;
   padding: 2rem;
   border-radius: var(--radius);
-  transition: var(--transition);
+  /* transition: var(-transition); */
 }
 .submenu::before {
   content: '';
@@ -192,7 +191,7 @@ body {
   position: absolute;
   top: -5px;
   left: 50%;
-  transform: translateX(-50%);
+  /* transform: translateX(-50%); */
 }
 
 .submenu.show {

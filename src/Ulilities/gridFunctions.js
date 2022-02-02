@@ -240,10 +240,7 @@ export const animateInstantly = (
     grid[startNode[0]][startNode[1]],
     grid[endNode[0]][endNode[1]]
   );
-  console.log('nodes', nodes);
-  console.log('end', endNode);
   const shortestPathNodes = shortestPath(grid[endNode[0]][endNode[1]]);
-  console.log(shortestPathNodes);
   instantAnimatePath(nodes, shortestPathNodes.reverse(), grid);
 };
 

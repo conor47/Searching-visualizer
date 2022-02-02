@@ -1,7 +1,7 @@
 .modal-background {
   width: 100vw;
   min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   left: 0;
@@ -23,6 +23,7 @@
   flex-direction: column;
   padding: 2rem;
   font-size: 1.3rem;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
   line-height: 1.5rem;
 }
 

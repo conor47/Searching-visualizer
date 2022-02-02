@@ -14,14 +14,15 @@ const Modal = () => {
           <AiOutlineCloseCircle className="exit-icon" />
         </button>
         {modalInformation.map((info, idx) => {
-          const { page, title, p1, p2, url } = info;
+          const { page, title, content, url } = info;
           if (page === modalPage) {
             return (
               <div className="modal-information">
                 <div className="title">{title}</div>
                 <div className="body">
-                  <p>{p1}</p>
-                  <p>{p2}</p>
+                  {content.map((text, idx) => {
+                    return <p key={idx}>{text}</p>;
+                  })}
                   {url && (
                     <img className="modal-gif" src={url} alt="wall gif" />
                   )}

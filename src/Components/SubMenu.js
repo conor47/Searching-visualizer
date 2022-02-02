@@ -24,7 +24,6 @@ const Submenu = () => {
   } = useSearchingContext();
 
   const handleUpdate = (e, menu) => {
-    console.log(menu);
     if (menu === 'algos') {
       setSearchingAlgorithm(e.target.textContent);
     } else if (menu === 'speed') {

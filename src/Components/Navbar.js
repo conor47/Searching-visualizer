@@ -58,10 +58,12 @@ const Navbar = () => {
   };
 
   const displaySubmenu = (e) => {
+    const offSet = window.scrollY;
     const page = e.target.textContent;
     const tempBtn = e.target.getBoundingClientRect();
+    console.log(tempBtn);
     const center = (tempBtn.left + tempBtn.right) / 2;
-    const bottom = tempBtn.bottom - 3;
+    const bottom = tempBtn.bottom - 3 + offSet;
     openSubmenu(page, { center, bottom });
   };
   const handleSubmenu = (e) => {

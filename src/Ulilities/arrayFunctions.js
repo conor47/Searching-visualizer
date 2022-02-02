@@ -11,7 +11,6 @@ export const generateArray = (size) => {
 };
 
 export const successPass = (array, speed) => {
-  console.log('success');
   for (let i = 0; i < array.length; i++) {
     setTimeout(() => {
       array[i].style.backgroundColor = '#48c9b0';
