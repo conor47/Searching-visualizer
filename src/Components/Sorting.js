@@ -6,7 +6,7 @@ import runInsertionSort from '../Algorithms/SortingRunners/runInsertionSort';
 import runMergeSort from '../Algorithms/SortingRunners/runMergeSort';
 import runHeapSort from '../Algorithms/SortingRunners/runHeapSort';
 import { useNavbarContext } from '../Context/NavbarContext';
-import { generateArray, resetColor } from '../Ulilities/arrayFunctions';
+import { resetColor } from '../Ulilities/arrayFunctions';
 import Navbar from './Navbar';
 import Submenu from './SubMenu';
 
