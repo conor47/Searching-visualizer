@@ -83,6 +83,9 @@ const PathFinding = () => {
         updateGrid
       );
       return;
+    } else if (mouseDown && moveStart) {
+      moveStartNode(row, col);
+      return;
     } else if (mouseDown && moveEnd) {
       if (grid[row][col].isWall) {
         return;

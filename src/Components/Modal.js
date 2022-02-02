@@ -17,7 +17,7 @@ const Modal = () => {
           const { page, title, content, url } = info;
           if (page === modalPage) {
             return (
-              <div idx={idx} className="modal-information">
+              <div key={idx} className="modal-information">
                 <div className="title">{title}</div>
                 <div className="body">
                   {content.map((text, idx) => {

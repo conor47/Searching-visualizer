@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavbarContext } from '../Context/NavbarContext';
 import { useSearchingContext } from '../Context/SearchingContext';
 import { randomTerrain } from '../Algorithms/Maze/randomTerrain';
+import { recursiveDivisionMaze } from '../Algorithms/Maze/mazeGenerator';
 import {
   terrainGenerator,
   resetGrid,
@@ -35,7 +36,17 @@ const Submenu = () => {
         setSpeed(20);
       }
     } else if (menu === 'terrain') {
-      terrainGenerator(grid, startNode, endNode, randomTerrain, updateGrid);
+      if (e.target.textContent === 'random') {
+        terrainGenerator(grid, startNode, endNode, randomTerrain, updateGrid);
+      } else {
+        terrainGenerator(
+          grid,
+          startNode,
+          endNode,
+          recursiveDivisionMaze,
+          updateGrid
+        );
+      }
     } else if (menu === 'controls') {
       if (e.target.textContent === 'clear all') {
         resetGrid(updateGrid, grid);

@@ -235,7 +235,21 @@ export const terrainGenerator = (
   const start = grid[startNode[0]][startNode[1]];
   const end = grid[endNode[0]][endNode[1]];
 
-  const newGrid = genFunction(grid, start, end);
+  let nodes = [];
+  const newGrid = genFunction(
+    nodes,
+    grid,
+    start,
+    end,
+    2,
+    grid.length - 3,
+    2,
+    grid[0].length - 3,
+    'horizontal',
+    false,
+    'wall'
+  );
+  console.log(nodes);
   updateGrid(newGrid);
 };
 
