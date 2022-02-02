@@ -6,12 +6,13 @@ import runInsertionSort from '../Algorithms/SortingRunners/runInsertionSort';
 import runMergeSort from '../Algorithms/SortingRunners/runMergeSort';
 import runHeapSort from '../Algorithms/SortingRunners/runHeapSort';
 import { useNavbarContext } from '../Context/NavbarContext';
-import { resetColor } from '../Ulilities/arrayFunctions';
+import { generateArray, resetColor } from '../Ulilities/arrayFunctions';
 import Navbar from './Navbar';
 import Submenu from './SubMenu';
 
 const SortingVisualizer = () => {
-  const { array, newArray, running, setRunning } = useSortingContext();
+  const { array, newArray, running, setRunning, success, setSuccess } =
+    useSortingContext();
   const [speedSlider, setSpeedSlider] = useState(-10);
   const [sizeSlider, setSizeSlider] = useState(155);
   const [arraySize, setArraySize] = useState(155);
@@ -102,7 +103,7 @@ const SortingVisualizer = () => {
             <button
               className="new-array-button"
               // disabled={running}
-              onClick={() => createNewArray(arraySize)}
+              onClick={() => createNewArray()}
               disabled={running ? 'disabled' : null}
             >
               Generate New Array
@@ -110,7 +111,13 @@ const SortingVisualizer = () => {
             <button
               className="new-array-button"
               onClick={() =>
-                runMergeSort(array, arrayBars, -sortingSpeed, setRunning)
+                runMergeSort(
+                  array,
+                  arrayBars,
+                  -sortingSpeed,
+                  setRunning,
+                  setSuccess
+                )
               }
               disabled={running ? 'disabled' : ''}
             >
@@ -119,7 +126,13 @@ const SortingVisualizer = () => {
             <button
               className="new-array-button"
               onClick={() =>
-                runBubbleSort(array, arrayBars, -sortingSpeed, setRunning)
+                runBubbleSort(
+                  array,
+                  arrayBars,
+                  -sortingSpeed,
+                  setRunning,
+                  setSuccess
+                )
               }
               disabled={running ? 'disabled' : null}
             >
@@ -128,7 +141,13 @@ const SortingVisualizer = () => {
             <button
               className="new-array-button"
               onClick={() =>
-                runInsertionSort(array, arrayBars, -sortingSpeed, setRunning)
+                runInsertionSort(
+                  array,
+                  arrayBars,
+                  -sortingSpeed,
+                  setRunning,
+                  setSuccess
+                )
               }
               disabled={running ? 'disabled' : null}
             >
@@ -137,7 +156,13 @@ const SortingVisualizer = () => {
             <button
               className="new-array-button"
               onClick={() =>
-                runQuickSort(array, arrayBars, -sortingSpeed, setRunning)
+                runQuickSort(
+                  array,
+                  arrayBars,
+                  -sortingSpeed,
+                  setRunning,
+                  setSuccess
+                )
               }
               disabled={running ? 'disabled' : null}
             >
@@ -145,9 +170,18 @@ const SortingVisualizer = () => {
             </button>
             <button
               className="new-array-button"
-              onClick={() =>
-                runHeapSort(array, arrayBars, -sortingSpeed, setRunning)
-              }
+              onClick={() => {
+                if (success) {
+                  createNewArray();
+                }
+                runHeapSort(
+                  array,
+                  arrayBars,
+                  -sortingSpeed,
+                  setRunning,
+                  setSuccess
+                );
+              }}
               disabled={running ? 'disabled' : null}
             >
               Heap Sort

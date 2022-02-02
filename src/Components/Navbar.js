@@ -14,6 +14,7 @@ const Navbar = () => {
     endNode,
     speed,
     setRunning,
+    updateGrid,
     isRunning,
     setSuccess,
   } = useSearchingContext();
@@ -44,7 +45,11 @@ const Navbar = () => {
           algoRef.current.style.color = 'white';
         }, 1000);
       }, 1);
+      return;
+    } else if (isRunning) {
+      return;
     }
+
     const { algorithm, shortestPath, name } = searchingAlgorithm;
     runAlgorithm(
       name,
@@ -55,7 +60,8 @@ const Navbar = () => {
       shortestPath,
       speed,
       setRunning,
-      setSuccess
+      setSuccess,
+      updateGrid
     );
   };
 

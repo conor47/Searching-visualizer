@@ -10,9 +10,13 @@ export const generateArray = (size) => {
   return arr;
 };
 
-export const successPass = (array, speed) => {
+export const successPass = (array, speed, setSuccess, setRunning) => {
   for (let i = 0; i < array.length; i++) {
     setTimeout(() => {
+      if (i === array.length - 1) {
+        setSuccess(true);
+        setRunning(false);
+      }
       array[i].style.backgroundColor = '#48c9b0';
     }, i * 10);
   }

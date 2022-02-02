@@ -59,8 +59,10 @@ export const runAlgorithm = (
   shortestPath,
   speed,
   setRunning,
-  setSuccess
+  setSuccess,
+  updateGrid
 ) => {
+  cleanGrid(grid, updateGrid);
   setRunning(true);
   if (name === 'bidirectionalbfs') {
     const { nodes, middleA, middleB, success } = algorithm(
@@ -73,7 +75,6 @@ export const runAlgorithm = (
       middleA,
       middleB
     );
-    console.log(success, nodes);
     animatePath(
       nodes,
       shortestPathNodes,

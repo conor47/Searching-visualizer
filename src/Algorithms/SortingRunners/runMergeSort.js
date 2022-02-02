@@ -1,9 +1,16 @@
 import { getMergeSortAnimations } from '../Sorting/mergeSort';
 import { successPass } from '../../Ulilities/arrayFunctions';
 
-const runMergeSort = (array, arrayBars, sortingSpeed, setRunning) => {
+const runMergeSort = (
+  array,
+  arrayBars,
+  sortingSpeed,
+  setRunning,
+  setSuccess
+) => {
   const animations = getMergeSortAnimations(array.slice());
   setRunning(true);
+  setSuccess(false);
   for (let i = 0; i < animations.length; i++) {
     const isColorChange = i % 3 !== 2;
     if (isColorChange) {
@@ -13,8 +20,7 @@ const runMergeSort = (array, arrayBars, sortingSpeed, setRunning) => {
       const color = i % 3 === 0 ? 'red' : 'white';
       setTimeout(() => {
         if (i === animations.length - 1) {
-          setRunning(false);
-          successPass(arrayBars, sortingSpeed);
+          successPass(arrayBars, sortingSpeed, setSuccess, setRunning);
         }
         barOneStyle.backgroundColor = color;
         barTwoStyle.backgroundColor = color;
@@ -22,8 +28,7 @@ const runMergeSort = (array, arrayBars, sortingSpeed, setRunning) => {
     } else {
       setTimeout(() => {
         if (i === animations.length - 1) {
-          setRunning(false);
-          successPass(arrayBars, sortingSpeed);
+          successPass(arrayBars, sortingSpeed, setSuccess, setRunning);
         }
         const [barOneIdx, newHeight] = animations[i];
         const barOneStyle = arrayBars[barOneIdx].style;
