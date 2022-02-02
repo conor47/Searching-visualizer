@@ -38,9 +38,9 @@ const Submenu = () => {
       terrainGenerator(grid, startNode, endNode, randomTerrain, updateGrid);
     } else if (menu === 'controls') {
       if (e.target.textContent === 'clear all') {
-        resetGrid(updateGrid);
+        resetGrid(updateGrid, grid);
       } else if (e.target.textContent === 'clear walls') {
-        clearWalls(grid, updateGrid);
+        clearWalls(updateGrid, grid);
       }
     }
   };

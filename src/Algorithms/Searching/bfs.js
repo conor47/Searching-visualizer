@@ -19,7 +19,7 @@ export const bfs = (grid, startNode, endNode) => {
     }
   }
   startNode.previousNode = null;
-  return nodesInOrder;
+  return { nodes: nodesInOrder, success: endNode.isVisited };
 };
 
 const getNeighbours = (grid, node) => {

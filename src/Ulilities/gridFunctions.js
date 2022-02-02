@@ -12,13 +12,22 @@ export const generateGrid = () => {
   return grid;
 };
 
-export const resetGrid = (updateGrid) => {
-  const newGrid = generateGrid();
-  for (let i = 0; i < 25; i++) {
-    for (let j = 0; j < 60; j++) {
+export const resetGrid = (updateGrid, grid) => {
+  const newGrid = [];
+  for (let i = 0; i < grid.length; i++) {
+    let row = [];
+    for (let j = 0; j < grid[0].length; j++) {
+      let oldNode = grid[i][j];
+      let newNode = { ...oldNode };
+      if (!oldNode.isEnd && !oldNode.isEnd) {
+        newNode.isVisited = false;
+        newNode.isWall = false;
+      }
+      row.push(newNode);
       document.getElementById(`${i}-${j}`).classList.remove('visited');
       document.getElementById(`${i}-${j}`).classList.remove('shortest');
     }
+    newGrid.push(row);
   }
   updateGrid(newGrid);
 };
@@ -49,11 +58,12 @@ export const runAlgorithm = (
   endNode,
   shortestPath,
   speed,
-  setRunning
+  setRunning,
+  setSuccess
 ) => {
   setRunning(true);
   if (name === 'bidirectionalbfs') {
-    const { nodes, middleA, middleB } = algorithm(
+    const { nodes, middleA, middleB, success } = algorithm(
       grid,
       grid[startNode[0]][startNode[1]],
       grid[endNode[0]][endNode[1]]
@@ -63,33 +73,60 @@ export const runAlgorithm = (
       middleA,
       middleB
     );
-    animatePath(nodes, shortestPathNodes, speed, setRunning);
+    console.log(success, nodes);
+    animatePath(
+      nodes,
+      shortestPathNodes,
+      speed,
+      setRunning,
+      success,
+      setSuccess
+    );
     return;
   } else if (name === 'dfs') {
-    const nodes = algorithm(
+    const { nodes, success } = algorithm(
       grid,
       grid[startNode[0]][startNode[1]],
       grid[endNode[0]][endNode[1]]
     );
-    animatePath(nodes, nodes, speed, setRunning);
+    animatePath(nodes, nodes, speed, setRunning, success, setSuccess);
     return;
   }
 
-  const nodes = algorithm(
+  const { nodes, success } = algorithm(
     grid,
     grid[startNode[0]][startNode[1]],
     grid[endNode[0]][endNode[1]]
   );
   const shortestPathNodes = shortestPath(grid[endNode[0]][endNode[1]]);
-  animatePath(nodes, shortestPathNodes.reverse(), speed, setRunning);
+  animatePath(
+    nodes,
+    shortestPathNodes.reverse(),
+    speed,
+    setRunning,
+    success,
+    setSuccess
+  );
 };
 
-export const animatePath = (path, shortestPath, speed, setRunning) => {
+export const animatePath = (
+  path,
+  shortestPath,
+  speed,
+  setRunning,
+  success,
+  setSuccess
+) => {
+  setSuccess(success);
   for (let i = 0; i < path.length; i++) {
     if (path[i].isStart) {
       continue;
     }
     if (i === path.length - 1) {
+      if (!success) {
+        setRunning(false);
+        return;
+      }
       setTimeout(() => {
         animateShortest(shortestPath, speed, setRunning);
       }, i * speed);
@@ -211,7 +248,6 @@ export const animateInstantly = (
   shortestPath,
   updateGrid
 ) => {
-  // cleanGrid(grid, updateGrid);
   if (name === 'bidirectionalbfs') {
     const { nodes, middleA, middleB } = algorithm(
       grid,
@@ -223,19 +259,19 @@ export const animateInstantly = (
       middleA,
       middleB
     );
-    instantAnimatePath(nodes, shortestPathNodes, updateGrid, grid);
+    instantAnimatePath(nodes, shortestPathNodes, grid);
     return;
   } else if (name === 'dfs') {
-    const nodes = algorithm(
+    const { nodes } = algorithm(
       grid,
       grid[startNode[0]][startNode[1]],
       grid[endNode[0]][endNode[1]]
     );
-    instantAnimatePath(nodes, nodes, updateGrid, grid);
+    instantAnimatePath(nodes, nodes, grid);
     return;
   }
 
-  const nodes = algorithm(
+  const { nodes } = algorithm(
     grid,
     grid[startNode[0]][startNode[1]],
     grid[endNode[0]][endNode[1]]

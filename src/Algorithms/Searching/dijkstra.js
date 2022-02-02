@@ -8,7 +8,7 @@ export const dijkstra = (grid, startNode, endNode) => {
     let closestNode = unvisitedNodes.shift();
 
     if (closestNode.distance === Infinity) {
-      return nodesInOrder;
+      return { nodes: nodesInOrder, success: endNode.isVisited };
     }
 
     if (closestNode.isWall) {
@@ -18,7 +18,7 @@ export const dijkstra = (grid, startNode, endNode) => {
     closestNode.isVisited = true;
     nodesInOrder.push(closestNode);
     if (closestNode === endNode) {
-      return nodesInOrder;
+      return { nodes: nodesInOrder, success: endNode.isVisited };
     }
     updateUnvisitedNeighbours(closestNode, grid);
   }

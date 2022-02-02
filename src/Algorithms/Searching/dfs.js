@@ -2,8 +2,7 @@ export const dfs = (grid, startNode, endNode) => {
   const nodesInOrder = [];
   recurse(grid, startNode, nodesInOrder, endNode);
   startNode.previousNode = null;
-  const time2 = performance.now();
-  return nodesInOrder;
+  return { nodes: nodesInOrder, success: endNode.isVisited };
 };
 
 const recurse = (grid, node, nodesInOrder, endNode) => {

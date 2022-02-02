@@ -15,6 +15,7 @@ const Navbar = () => {
     speed,
     setRunning,
     isRunning,
+    setSuccess,
   } = useSearchingContext();
   const path = useLocation().pathname;
   const algoRef = useRef(null);
@@ -53,7 +54,8 @@ const Navbar = () => {
       endNode,
       shortestPath,
       speed,
-      setRunning
+      setRunning,
+      setSuccess
     );
   };
 
@@ -61,9 +63,8 @@ const Navbar = () => {
     const offSet = window.scrollY;
     const page = e.target.textContent;
     const tempBtn = e.target.getBoundingClientRect();
-    console.log(tempBtn);
     const center = (tempBtn.left + tempBtn.right) / 2;
-    const bottom = tempBtn.bottom - 3 + offSet;
+    const bottom = tempBtn.bottom + offSet;
     openSubmenu(page, { center, bottom });
   };
   const handleSubmenu = (e) => {

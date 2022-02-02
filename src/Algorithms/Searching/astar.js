@@ -27,7 +27,7 @@ export const astar = (grid, startNode, endNode) => {
     nodesInOrder.push(currentNode);
 
     if (currentNode === endNode) {
-      return nodesInOrder;
+      return { nodes: nodesInOrder, success: endNode.isVisited };
     }
 
     const neighbours = getNeighbours(grid, currentNode);
@@ -46,6 +46,7 @@ export const astar = (grid, startNode, endNode) => {
         nei.hCost = getDistance(nei, endNode);
         nei.fCost = nei.gCost + nei.hCost;
         nei.previousNode = currentNode;
+        nei.isVisited = true;
 
         if (!openSet.find((node) => node === nei)) {
           openSet.push(nei);
@@ -53,7 +54,7 @@ export const astar = (grid, startNode, endNode) => {
       }
     }
   }
-  return nodesInOrder;
+  return { nodes: nodesInOrder, success: endNode.isVisited };
 };
 
 const getDistance = (nodeA, nodeB) => {

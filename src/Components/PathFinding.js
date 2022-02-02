@@ -45,7 +45,7 @@ const PathFinding = () => {
       setMouseDown(true);
       setMoveStart(true);
       return;
-    } else if (row === end[0] && col == end[1]) {
+    } else if (row === end[0] && col === end[1]) {
       setMouseDown(true);
       setMoveEnd(true);
       return;

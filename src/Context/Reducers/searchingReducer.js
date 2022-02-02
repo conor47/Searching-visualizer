@@ -22,9 +22,9 @@ const searchingReducer = (state, action) => {
     case 'SET_MODAL_PAGE':
       let page = action.payload.page;
       if (page === 7) {
-        page = 6;
-      } else if (page === 0) {
         page = 1;
+      } else if (page === 0) {
+        page = 6;
       }
       return { ...state, modalPage: page };
     default:

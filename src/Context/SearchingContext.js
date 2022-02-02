@@ -14,7 +14,7 @@ const initialState = {
   shortestPathAlgorithm: null,
   speed: 10,
   isRunning: false,
-  isSuccessful: true,
+  isSuccessful: false,
   modal: true,
   modalPage: 1,
 };
@@ -45,7 +45,7 @@ export const SearchProvider = ({ children }) => {
     dispatch({ type: 'SET_SPEED', payload: { speed } });
   };
 
-  const setIsSuccessful = (success) => {
+  const setSuccess = (success) => {
     dispatch({ type: 'SET_SUCCESS', payload: { success } });
   };
 
@@ -70,7 +70,7 @@ export const SearchProvider = ({ children }) => {
         setSpeed,
         setEndNode,
         setRunning,
-        setIsSuccessful,
+        setSuccess,
         updateGrid,
         setModal,
         setModalPage,

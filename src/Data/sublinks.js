@@ -27,7 +27,7 @@ const sublinks = [
   {
     page: 'clear',
     links: [
-      { label: 'clear all', icon: <FaBriefcase />, menu: 'clear' },
+      { label: 'clear all', icon: <FaBriefcase />, menu: 'controls' },
       { label: 'clear walls', icon: <FaBriefcase />, menu: 'controls' },
       { label: 'clear path', icon: <FaBriefcase />, menu: 'controls' },
     ],
