@@ -11,7 +11,7 @@ import Navbar from './Navbar';
 import Submenu from './SubMenu';
 
 const SortingVisualizer = () => {
-  const { array, newArray, running, setRunning } = useSortingContext();
+  const { array, newArray, running, setRunning, success } = useSortingContext();
   const [speedSlider, setSpeedSlider] = useState(-10);
   const [sizeSlider, setSizeSlider] = useState(155);
   const [arraySize, setArraySize] = useState(155);

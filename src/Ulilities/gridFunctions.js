@@ -201,7 +201,7 @@ export const cleanGrid = (grid, updateGrid) => {
   updateGrid(newGrid);
 };
 
-export const clearWalls = (grid, updateGrid) => {
+export const clearWalls = (updateGrid, grid) => {
   let newGrid = [];
   for (let i = 0; i < grid.length; i++) {
     let row = [];
@@ -210,6 +210,7 @@ export const clearWalls = (grid, updateGrid) => {
       if (node.isWall) {
         node.isWall = false;
       }
+      document.getElementById(`${i}-${j}`).classList.remove('wall');
       row.push(node);
     }
     newGrid.push(row);
@@ -225,15 +226,36 @@ export const clearVisited = (grid) => {
   }
 };
 
+export const clearPath = (updateGrid, grid) => {
+  let newGrid = [];
+  for (let i = 0; i < grid.length; i++) {
+    let row = [];
+    for (let j = 0; j < grid[0].length; j++) {
+      let node = grid[i][j];
+      document.getElementById(`${i}-${j}`).classList.remove('shortest');
+      row.push(node);
+    }
+    newGrid.push(row);
+  }
+  updateGrid(newGrid);
+};
+
 export const terrainGenerator = (
   grid,
   startNode,
   endNode,
   genFunction,
-  updateGrid
+  updateGrid,
+  name
 ) => {
   const start = grid[startNode[0]][startNode[1]];
   const end = grid[endNode[0]][endNode[1]];
+
+  if (name === 'random') {
+    let nodes = genFunction(grid, start, end);
+    updateGrid(nodes);
+    return;
+  }
 
   let nodes = [];
   const newGrid = genFunction(
@@ -249,7 +271,6 @@ export const terrainGenerator = (
     false,
     'wall'
   );
-  console.log(nodes);
   updateGrid(newGrid);
 };
 

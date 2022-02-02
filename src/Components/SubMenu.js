@@ -7,6 +7,7 @@ import {
   terrainGenerator,
   resetGrid,
   clearWalls,
+  clearPath,
 } from '../Ulilities/gridFunctions';
 
 const Submenu = () => {
@@ -37,14 +38,22 @@ const Submenu = () => {
       }
     } else if (menu === 'terrain') {
       if (e.target.textContent === 'random') {
-        terrainGenerator(grid, startNode, endNode, randomTerrain, updateGrid);
+        terrainGenerator(
+          grid,
+          startNode,
+          endNode,
+          randomTerrain,
+          updateGrid,
+          e.target.textContent
+        );
       } else {
         terrainGenerator(
           grid,
           startNode,
           endNode,
           recursiveDivisionMaze,
-          updateGrid
+          updateGrid,
+          e.target.textContent
         );
       }
     } else if (menu === 'controls') {
@@ -52,6 +61,8 @@ const Submenu = () => {
         resetGrid(updateGrid, grid);
       } else if (e.target.textContent === 'clear walls') {
         clearWalls(updateGrid, grid);
+      } else {
+        clearPath(updateGrid, grid);
       }
     }
   };

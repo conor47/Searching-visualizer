@@ -7,6 +7,8 @@ const stateReducer = (state, action) => {
     case 'CREATE_ARRAY':
       let newArray = generateArray(action.payload.size);
       return { ...state, array: newArray };
+    case 'SET_SUCCESS':
+      return { ...state, success: action.payload.success };
     default:
       return { ...state };
   }
