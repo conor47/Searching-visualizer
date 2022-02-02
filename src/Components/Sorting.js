@@ -5,6 +5,7 @@ import runQuickSort from '../Algorithms/SortingRunners/runQuickSort';
 import runSelectionSort from '../Algorithms/SortingRunners/runSelectionSort';
 import runInsertionSort from '../Algorithms/SortingRunners/runInsertionSort';
 import runMergeSort from '../Algorithms/SortingRunners/runMergeSort';
+import runHeapSort from '../Algorithms/SortingRunners/runHeapSort';
 import { useNavbarContext } from '../Context/NavbarContext';
 import { resetColor } from '../Ulilities/arrayFunctions';
 import Navbar from './Navbar';
@@ -151,6 +152,15 @@ const SortingVisualizer = () => {
               disabled={running ? 'disabled' : null}
             >
               Quick Sort
+            </button>
+            <button
+              className="new-array-button"
+              onClick={() =>
+                runHeapSort(array, arrayBars, -sortingSpeed, setRunning)
+              }
+              disabled={running ? 'disabled' : null}
+            >
+              Heap Sort
             </button>
           </div>
         </div>
