@@ -20,10 +20,7 @@ const sublinks = [
   },
   {
     page: 'terrain',
-    links: [
-      { label: 'random', menu: 'terrain' },
-      { label: 'recursive', menu: 'terrain' },
-    ],
+    links: [{ label: 'random', menu: 'terrain' }],
   },
   {
     page: 'clear',
